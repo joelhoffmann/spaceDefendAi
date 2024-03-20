@@ -1313,7 +1313,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 3c9e54cd5a7d04d4c831825c78535c26, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: EnemyAgent
