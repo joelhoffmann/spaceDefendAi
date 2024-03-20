@@ -35,6 +35,8 @@ public class EnemyAgent : Agent
         sensor.AddObservation((Vector2)(target.position - transform.position));
         sensor.AddObservation(rBody.velocity.x);
         sensor.AddObservation(rBody.velocity.y);
+        sensor.AddObservation(rBody.angularVelocity);
+        sensor.AddObservation(transform.rotation.z);
     }
 
     public float speed = 10;
@@ -60,7 +62,13 @@ public class EnemyAgent : Agent
             EndEpisode();
         }
 
-        else if(distanceToTarget > 15.0f)
+        else if(distanceToTarget > 2.5f)
+        {
+            EndEpisode();
+        }
+
+        // took too long
+        if (StepCount > 1000)
         {
             EndEpisode();
         }
