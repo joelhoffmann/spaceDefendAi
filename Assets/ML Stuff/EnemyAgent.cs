@@ -5,6 +5,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
+using Unity.Sentis.Layers;
 
 public class EnemyAgent : Agent
 {
@@ -58,18 +59,20 @@ public class EnemyAgent : Agent
         float distanceToTarget = Vector2.Distance(transform.position, target.position);
         if (distanceToTarget < targetRadius) // radius of target plus radius of agent
         {
-            SetReward(1.0f);
+            SetReward(1.0f - StepCount / 1000.0f);
             EndEpisode();
         }
 
         else if(distanceToTarget > 2.5f)
         {
+            SetReward(-1.0f);
             EndEpisode();
         }
 
         // took too long
         if (StepCount > 1000)
         {
+            SetReward(-1.0f * distanceToTarget/spawnRadius);
             EndEpisode();
         }
     }
