@@ -35,7 +35,7 @@ public class CoinManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
-        Debug.Log("Added " + amount + " coins. Total coins: " + coins);
+        //Debug.Log("Added " + amount + " coins. Total coins: " + coins);
         refreshDisplay();
     }
 
@@ -44,13 +44,13 @@ public class CoinManager : MonoBehaviour
         if (coins >= amount)
         {
             coins -= amount;
-            Debug.Log("Subtracted " + amount + " coins. Total coins: " + coins);
+            //Debug.Log("Subtracted " + amount + " coins. Total coins: " + coins);
             refreshDisplay();
             return true;
         }
         else
         {
-            Debug.Log("Not enough coins to subtract " + amount + " coins.");
+            //Debug.Log("Not enough coins to subtract " + amount + " coins.");
             return false;
         }
     }
