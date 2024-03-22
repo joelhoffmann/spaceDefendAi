@@ -10,6 +10,8 @@ using Unity.Sentis.Layers;
 public class EnemyAgent : Agent
 {
     Rigidbody2D rBody;
+
+    public EnemyVision vision;
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
@@ -38,6 +40,7 @@ public class EnemyAgent : Agent
         sensor.AddObservation(rBody.velocity.y);
         sensor.AddObservation(rBody.angularVelocity);
         sensor.AddObservation(transform.rotation.z);
+        sensor.AddObservation(vision.GetAiInput());
     }
 
     public float speed = 10;

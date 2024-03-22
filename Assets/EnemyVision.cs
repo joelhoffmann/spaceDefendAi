@@ -9,13 +9,17 @@ public class EnemyVision : MonoBehaviour
 
     int stuffInView = 0;
     bool playerInView = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+
+    public float GetAiInput(){
+        if(playerInView){
+            return 1;
+        }else if(stuffInView > 0){
+            return -1;
+        }else{
+            return 0;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(playerInView){
@@ -27,28 +31,23 @@ public class EnemyVision : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         stuffInView++;
-        Debug.Log("something entered view");
+        //Debug.Log("something entered view");
         if(other.gameObject.tag == "Shield"){
             playerInView = true;
-            Debug.Log("player in view");
+            //Debug.Log("player in view");
         }
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
         stuffInView--;
-        Debug.Log("something left view");
+        //Debug.Log("something left view");
         if(other.gameObject.tag == "Shield"){
             playerInView = false;
-            Debug.Log("player left view");
+            //Debug.Log("player left view");
         }
     }
 }
