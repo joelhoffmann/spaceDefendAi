@@ -650,6 +650,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5089261357393202160, guid: 6af1dcea9c6f80844aac6a87553ced89, type: 3}
+      propertyPath: interval
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5089261357393202160, guid: 6af1dcea9c6f80844aac6a87553ced89, type: 3}
       propertyPath: shieldHealth
       value: 100
       objectReference: {fileID: 0}

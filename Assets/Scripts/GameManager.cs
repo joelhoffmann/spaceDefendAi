@@ -43,12 +43,13 @@ public class GameManager : MonoBehaviour
         if (Player.instance != null)
         {
             roundTimer = 30 * roundNumber;             
-            Player.instance.ReceiveCoins(coinsPerRound * roundNumber);
+        //    Player.instance.ReceiveCoins(coinsPerRound * roundNumber);
             roundNumber++; 
             GameObject shield = GameObject.FindGameObjectWithTag("Shield");
             shield.SetActive(true); 
             Player.instance.shieldHealth = 100;
         }
                      
-    }    
+    } 
+           
 }
