@@ -7,9 +7,9 @@ public class RoundManager : MonoBehaviour
 {
     public static RoundManager instance;
 
-    public float spawnInterval = 2f; // Intervall für das Spawnen von Feinden
+    public float spawnInterval = 2f; // Intervall fï¿½r das Spawnen von Feinden
     public int startEnemyCount = 3; // Anzahl der Feinde zu Beginn
-    public int enemyIncreasePerRound = 1; // Anzahl der zusätzlichen Feinde pro Runde
+    public int enemyIncreasePerRound = 1; // Anzahl der zusï¿½tzlichen Feinde pro Runde
 
     private Transform container;
     private Transform enemyTemplate;
@@ -54,20 +54,20 @@ public class RoundManager : MonoBehaviour
 
     void StartNewRound()
     {
-        Debug.Log("Starting Round " + currentRound);
+        Debug.Log("Starting Round " + currentRound);        
         GameObject.Find("roundDisplay").GetComponent<TextMeshProUGUI>().text = "Round " + currentRound.ToString();
         lockRound = false;
-        // Spawnen Sie die Feinde für die aktuelle Runde
+        // Spawnen Sie die Feinde fï¿½r die aktuelle Runde
         for (int i = 0; i < startEnemyCount + (enemyIncreasePerRound * (currentRound - 1)); i++)
         {
             SpawnEnemy();
         }
-    }
+    }    
 
 
     void SpawnEnemy()
     {
-        // Wählen Sie eine zufällige Position um den Bildschirmrand aus
+        // Wï¿½hlen Sie eine zufï¿½llige Position um den Bildschirmrand aus
         Vector3 randomSpawnPosition = GetRandomSpawnPosition();
 
         GameObject newEnemyObject = Instantiate(enemyPrefab, container);
@@ -82,10 +82,10 @@ public class RoundManager : MonoBehaviour
         float screenWidth = Camera.main.orthographicSize * 2f * Screen.width / Screen.height;
         float screenHeight = Camera.main.orthographicSize * 2f;
 
-        // Wählen Sie eine zufällige Seite des Bildschirms aus
+        // Wï¿½hlen Sie eine zufï¿½llige Seite des Bildschirms aus
         int side = Random.Range(0, 4); // 0: oben, 1: rechts, 2: unten, 3: links
 
-        // Wählen Sie eine zufällige Position auf der ausgewählten Seite aus
+        // Wï¿½hlen Sie eine zufï¿½llige Position auf der ausgewï¿½hlten Seite aus
         switch (side)
         {
             case 0: // oben
@@ -110,13 +110,23 @@ public class RoundManager : MonoBehaviour
 
     void Update()
     {
-        // Überprüfen Sie, ob alle Feinde besiegt wurden
+        // ï¿½berprï¿½fen Sie, ob alle Feinde besiegt wurden
         if (currentEnemies.Count == 0 && lockRound == false)
         {
-            currentRound++; // Erhöhen Sie die Rundennummer
+            currentRound++; // Erhï¿½hen Sie die Rundennummer
             lockRound = true;
             Invoke("StartNewRound", 3);
-            //StartNewRound(); // Starten Sie die nächste Runde
-        }
+            //StartNewRound(); // Starten Sie die nï¿½chste Runde
+        }       
+        if (Player.instance.health <= 0 && lockRound == false)
+            {
+                Debug.Log("Game Over!");
+                // Implementieren Sie hier die Logik fï¿½r das Spielende
+                currentRound = 1;
+                lockRound = true;
+                Player.instance.Respawn();
+                Invoke("StartNewRound", 3);
+            }
+       
     }
 }

@@ -34,6 +34,6 @@ public class WallManager : MonoBehaviour
         }
 
         //if(Input.GetMouseButton(0)) _currentWall.SetPosition(mousePos);
-    } 
+    }     
  
 }

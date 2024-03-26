@@ -25,6 +25,7 @@ public class Wall : MonoBehaviour
             _linePositions.Add(mousePos);
 
             UpdateLineRenderer();
+            OnEnable();
         }
     }
 
@@ -40,6 +41,10 @@ public class Wall : MonoBehaviour
                 enabled = false;
                 return;
             }
+            else if (collider.gameObject.tag == "Wall")
+            {
+                return;
+            }
         }         
 
         CoinManager.Instance.SubtractCoins(CoinManager.Instance.wallCost);
@@ -50,6 +55,18 @@ public class Wall : MonoBehaviour
             _renderer.SetPosition(i, _linePositions[i]);
             _collider.points = _linePositions.ToArray();  
         }
+    }
+
+    // Delete wall after 6 seconds
+    private void OnEnable()
+    {
+        StartCoroutine(DeleteWall());
+    }
+
+    private IEnumerator DeleteWall()
+    {
+        yield return new WaitForSeconds(6);
+        Destroy(gameObject);
     }
 
     //deprecated
