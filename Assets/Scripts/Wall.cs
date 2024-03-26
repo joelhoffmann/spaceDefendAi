@@ -17,20 +17,25 @@ public class Wall : MonoBehaviour
     }
 
     void Update()
-    {
-        if (enabled)
-        {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0; 
-            _linePositions.Add(mousePos);
+    {     
 
+        if (enabled)
+    {
+        Vector3 mousePos3D = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos3D.z = 0;
+        Vector2 mousePos = new Vector2(mousePos3D.x, mousePos3D.y);
+
+        if (_linePositions.Count == 0 || _linePositions[_linePositions.Count - 1] != mousePos)
+        {
+            _linePositions.Add(mousePos);
             UpdateLineRenderer();
             OnEnable();
         }
     }
+    }
 
     private void UpdateLineRenderer()
-    {   
+    {           
         // Cancel wall if it collides with shield, enemy or base
         Collider2D[] colliders = Physics2D.OverlapCircleAll(_linePositions[_linePositions.Count - 1], 0.1f);
         foreach (Collider2D collider in colliders)
@@ -38,23 +43,24 @@ public class Wall : MonoBehaviour
             if (collider.gameObject.tag == "Shield" || collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Base")      
                
             {             
-                enabled = false;
+                enabled = false;                
                 return;
-            }
-            else if (collider.gameObject.tag == "Wall")
-            {
-                return;
-            }
-        }         
-
-        CoinManager.Instance.SubtractCoins(CoinManager.Instance.wallCost);
+            }             
+            else if (collider.gameObject.tag == "Wall" ) 
+            { 
+               return;               
+            }            
+        }  
+   
         _renderer.positionCount = _linePositions.Count;       
 
         for (int i = 0; i < _linePositions.Count; i++)
-        {
-            _renderer.SetPosition(i, _linePositions[i]);
-            _collider.points = _linePositions.ToArray();  
+        {          
+           _renderer.SetPosition(i, _linePositions[i]);
+           _collider.points = _linePositions.ToArray(); 
+           
         }
+        CoinManager.Instance.SubtractCoins(CoinManager.Instance.wallCost);
     }
 
     // Delete wall after 6 seconds
