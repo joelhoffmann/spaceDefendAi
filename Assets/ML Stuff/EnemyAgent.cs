@@ -81,21 +81,29 @@ public class EnemyAgent : Agent
         if (distanceToTarget < targetRadius) // radius of target plus radius of agent
         {
             SetReward(1.0f - StepCount / 1000.0f);
-            EndEpisode();
+            End();
         }
 
         else if(distanceToTarget > 2.5f)
         {
             SetReward(-1.0f);
-            EndEpisode();
+            End();
         }
 
         // took too long
         if (StepCount > 1000)
         {
             SetReward(-1.0f * distanceToTarget/spawnRadius);
-            EndEpisode();
+            End();
         }
+    }
+
+    void End(){
+        foreach(GameObject wall in walls)
+        {
+            Destroy(wall);
+        }
+        EndEpisode();
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
