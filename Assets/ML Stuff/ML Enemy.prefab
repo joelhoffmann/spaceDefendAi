@@ -341,7 +341,9 @@ MonoBehaviour:
   MaxStep: 0
   vision: {fileID: 7559901136149090631}
   target: {fileID: 0}
+  wall: {fileID: 0}
   spawnRadius: 1.5
+  wallRadius: 1.2
   speed: 100
   rotateSpeed: 1
   targetRadius: 0.5

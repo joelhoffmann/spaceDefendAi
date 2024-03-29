@@ -18,17 +18,25 @@ public class EnemyAgent : Agent
     }
 
     public Transform target;
+    public Transform wall;
     public float spawnRadius = 5.0f;
+    public float wallRadius = 4.0f;
 
     public override void OnEpisodeBegin()
     {
+        //spawn the wall at a random position
+        float angle = Random.Range(0.0f, 2 * Mathf.PI);
+        Vector3 newPos = new Vector3(Mathf.Cos(angle) * wallRadius, Mathf.Sin(angle) * wallRadius, 0.0f);
+        wall.position = target.position + newPos;
+        wall.rotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
+
         // reset the velocity
         rBody.velocity = Vector2.zero;
         rBody.angularVelocity = 0;
 
         // spawn the agent at a random position in a circle around the target
-        float angle = Random.Range(0.0f, 2 * Mathf.PI);
-        Vector3 newPos = new Vector3(Mathf.Cos(angle) * spawnRadius, Mathf.Sin(angle) * spawnRadius, 0.0f);
+        angle = Random.Range(0.0f, 2 * Mathf.PI);
+        newPos = new Vector3(Mathf.Cos(angle) * spawnRadius, Mathf.Sin(angle) * spawnRadius, 0.0f);
         transform.position = target.position + newPos;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
     }
