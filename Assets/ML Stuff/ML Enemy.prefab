@@ -341,7 +341,7 @@ MonoBehaviour:
   MaxStep: 0
   vision: {fileID: 7559901136149090631}
   target: {fileID: 0}
-  wall: {fileID: 0}
+  wall: {fileID: 3663400328134936599, guid: 3f8256dbdcdb4c9468668643b9eb2c01, type: 3}
   spawnRadius: 1.5
   wallRadius: 1.2
   speed: 100
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 7
+    VectorObservationSize: 8
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2

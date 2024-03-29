@@ -8,46 +8,29 @@ public class EnemyVision : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     int stuffInView = 0;
-    bool playerInView = false;
 
     public float GetAiInput(){
-        if(playerInView){
-            return 1;
-        }else if(stuffInView > 0){
-            return -1;
-        }else{
-            return 0;
-        }
-    }
-
-    void Update()
-    {
-        if(playerInView){
-            spriteRenderer.color = new Color(0, 0, 1, 0.5f);
-        }else if(stuffInView > 0){
-            spriteRenderer.color = new Color(1, 0, 0, 0.5f);
-        }else{
-            spriteRenderer.color = new Color(1, 1, 1, 0.5f);
-        }
+        return stuffInView;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        stuffInView++;
-        //Debug.Log("something entered view");
-        if(other.gameObject.tag == "Shield"){
-            playerInView = true;
-            //Debug.Log("player in view");
+        Debug.Log("Triggered" + other.gameObject.tag);
+        if(other.gameObject.tag == "Shield" || other.gameObject.tag == "Base"){
+            return;
         }
+        stuffInView++;
+        spriteRenderer.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
     }
 
     void OnTriggerExit2D(Collider2D other)
     {
+        if(other.gameObject.tag == "Shield" || other.gameObject.tag == "Base"){
+            return;
+        }
         stuffInView--;
-        //Debug.Log("something left view");
-        if(other.gameObject.tag == "Shield"){
-            playerInView = false;
-            //Debug.Log("player left view");
+        if(stuffInView == 0){
+            spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
         }
     }
 }

@@ -18,36 +18,52 @@ public class EnemyAgent : Agent
     }
 
     public Transform target;
-    public Transform wall;
     public float spawnRadius = 5.0f;
+    public GameObject wall;
+    public int wallCount = 3;
+    List<GameObject> walls = new List<GameObject>();
+    
     public float wallRadius = 4.0f;
 
     public override void OnEpisodeBegin()
     {
-        //spawn the wall at a random position
-        float angle = Random.Range(0.0f, 2 * Mathf.PI);
-        Vector3 newPos = new Vector3(Mathf.Cos(angle) * wallRadius, Mathf.Sin(angle) * wallRadius, 0.0f);
-        wall.position = target.position + newPos;
-        wall.rotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
+        //spawn walls randomly in a circle around the target
+        float wallAngle;
+        Vector3 wallNewPos;
+        for(int i = 0; i < wallCount; i++)
+        {
+            wallAngle = Random.Range(0.0f, 2 * Mathf.PI);
+            wallNewPos = new Vector3(Mathf.Cos(wallAngle) * wallRadius, Mathf.Sin(wallAngle) * wallRadius, 0.0f);
+            walls.Add(Instantiate(wall, target.position + wallNewPos, Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f))));
+        }
+        
 
         // reset the velocity
         rBody.velocity = Vector2.zero;
         rBody.angularVelocity = 0;
 
         // spawn the agent at a random position in a circle around the target
-        angle = Random.Range(0.0f, 2 * Mathf.PI);
-        newPos = new Vector3(Mathf.Cos(angle) * spawnRadius, Mathf.Sin(angle) * spawnRadius, 0.0f);
+        float angle = Random.Range(0.0f, 2 * Mathf.PI);
+        Vector3 newPos = new Vector3(Mathf.Cos(angle) * spawnRadius, Mathf.Sin(angle) * spawnRadius, 0.0f);
         transform.position = target.position + newPos;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
+        // position relative to target
         sensor.AddObservation((Vector2)(target.position - transform.position));
+
+        // angle to target
+        sensor.AddObservation(Vector2.SignedAngle(transform.up, target.position - transform.position));
+
+        // velocity and rotation
         sensor.AddObservation(rBody.velocity.x);
         sensor.AddObservation(rBody.velocity.y);
         sensor.AddObservation(rBody.angularVelocity);
         sensor.AddObservation(transform.rotation.z);
+
+        // number of objects in view
         sensor.AddObservation(vision.GetAiInput());
     }
 
@@ -56,12 +72,6 @@ public class EnemyAgent : Agent
     public float targetRadius = 0.5f;
     public override void OnActionReceived(ActionBuffers actions)
     {
-        // x y force
-        // Vector2 controlSignal = Vector2.zero;
-        // controlSignal.x = actions.ContinuousActions[0];
-        // controlSignal.y = actions.ContinuousActions[1];
-        // rBody.AddForce(controlSignal * speed);
-
         //add force forward
         rBody.AddForce(transform.up * actions.ContinuousActions[1] * speed * Time.deltaTime);
         //rotate
