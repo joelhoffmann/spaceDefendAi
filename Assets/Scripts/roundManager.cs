@@ -84,7 +84,7 @@ public class RoundManager : MonoBehaviour
         lockRound = false;
         CoinManager.Instance.AddCoins(1000);
 
-        if (currentRound == 1 || (currentRound % 5 == 0 && activeSpawnPoints.Count <= spawnPoints.Length))
+        if (currentRound == 1 || (currentRound % 5 == 0 && activeSpawnPoints.Count <= spawnPoints.Length && currentRound < 20 ))
         {
             addNewActiveSpawnPoint();
         }
@@ -104,7 +104,6 @@ public class RoundManager : MonoBehaviour
     void SpawnEnemy()
     {
         // W�hlen Sie eine zuf�llige Position um den Bildschirmrand aus
-        // Wählen Sie eine zufällige Position um den Bildschirmrand aus
         Vector3 randomSpawnPosition = GetRandomSpawnPosition();
 
         GameObject newEnemyObject = Instantiate(enemyPrefab, container);
