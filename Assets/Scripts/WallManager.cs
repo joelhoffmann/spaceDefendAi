@@ -18,9 +18,9 @@ public class WallManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);       
-
-        if (Input.GetMouseButtonDown(0) && CoinManager.Instance.GetCoins() >= CoinManager.Instance.wallCost && ShopButtonController.instance.GetShopState() == false )
+        Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);        
+       
+        if (Input.GetMouseButtonDown(0) && CoinManager.Instance.GetCoins() >= CoinManager.Instance.wallCost && ShopButtonController.instance.GetShopState() == false)
         {
             _currentWall = Instantiate(_wallPreFab, mousePos, Quaternion.identity);
         }
