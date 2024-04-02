@@ -29,9 +29,10 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             dragObject = Instantiate(image.gameObject, image.position, image.rotation, transform);
             dragObject.name = transform.name;
             dragObject.transform.parent = GameObject.Find("activeItemContainer").transform;
-            shopAnimator.SetBool("isShopOpen", false);
+            shopAnimator.SetBool("isShopOpen", false); 
+            ShopButtonController.instance.isShopOpen = false;           
 
-            dragObject.transform.localScale = originalScale * 1.7f; // Hier können Sie den Vergrößerungsfaktor anpassen
+            dragObject.transform.localScale = originalScale * 1.7f; // Hier kï¿½nnen Sie den Vergrï¿½ï¿½erungsfaktor anpassen
 
             dragObject.transform.SetAsLastSibling();
         }
