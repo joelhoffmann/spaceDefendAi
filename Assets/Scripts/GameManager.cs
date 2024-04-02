@@ -50,6 +50,6 @@ public class GameManager : MonoBehaviour
             Player.instance.shieldHealth = 100;
         }
                      
-    } 
+    }     
            
 }
