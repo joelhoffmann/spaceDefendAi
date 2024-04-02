@@ -96,8 +96,7 @@ public class Enemy : MonoBehaviour
       // Destroy(gameObject); // Hier halt Ki zeug das der enemy woanders lang geht
    // }      
    
-    }
-    
+    }    
 
     void LowerHealth()
     {
@@ -121,6 +120,8 @@ public class Enemy : MonoBehaviour
     {
         // Informieren Sie den RoundManager, dass dieser Feind gestorben ist
         RoundManager.Instance.DecreaseEnemyCount(gameObject);
+        
+        Player.instance.ReceiveCoins(100);
 
         // Fügen Sie hier die Logik hinzu, die ausgeführt wird, wenn der Feind stirbt
         Destroy(gameObject);

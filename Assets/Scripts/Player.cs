@@ -65,6 +65,13 @@ public class Player : MonoBehaviour
         Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());                          
         CoinManager.Instance.AddCoins(amount);
        // Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());
+    }   
+
+     public void ReceiveExp(int amount)
+    {   
+        Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());                          
+        ExpManager.Instance.AddExp(amount);
+       // Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());
     }    
     
 
@@ -92,7 +99,7 @@ public class Player : MonoBehaviour
      IEnumerator CallMethodAfterDelay()
     {
         // Call your method here
-        ReceiveCoins(5);
+        ReceiveExp(5);
 
         // Wait for the specified delay before executing again
         yield return new WaitForSeconds(interval);

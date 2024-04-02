@@ -62,7 +62,7 @@ public class CoinManager : MonoBehaviour
 
     private void refreshDisplay()
     {
-        GameObject.Find("CoinDisplay").GetComponent<TextMeshProUGUI>().text = coins.ToString();
+        GameObject.Find("CoinDisplay").GetComponent<TextMeshProUGUI>().text = "Coins: " + coins.ToString();
 
     }
 }
