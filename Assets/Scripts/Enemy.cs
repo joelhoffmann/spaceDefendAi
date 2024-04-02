@@ -112,6 +112,7 @@ public class Enemy : MonoBehaviour
         // �berpr�fen Sie, ob der Feind keine Gesundheit mehr hat
         if (currentHealth <= 0f)
         {
+            Player.instance.ReceiveCoins(100);
             Die();
         }
     }
@@ -119,10 +120,8 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         // Informieren Sie den RoundManager, dass dieser Feind gestorben ist
-        RoundManager.Instance.DecreaseEnemyCount(gameObject);
+        RoundManager.Instance.DecreaseEnemyCount(gameObject);       
         
-        Player.instance.ReceiveCoins(100);
-
         // Fügen Sie hier die Logik hinzu, die ausgeführt wird, wenn der Feind stirbt
         Destroy(gameObject);
     }
