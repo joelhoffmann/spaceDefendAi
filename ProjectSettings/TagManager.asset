@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Shield
   - Wall
+  - Shop
   layers:
   - Default
   - TransparentFX
