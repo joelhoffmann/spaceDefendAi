@@ -33,7 +33,7 @@ public class ExpManager : MonoBehaviour
     public void AddExp(int amount)
     {
         exp += amount;
-        Debug.Log("Added " + amount + " exp. Total exp: " + exp);
+     //   Debug.Log("Added " + amount + " exp. Total exp: " + exp);
         refreshDisplay();
     }
 

@@ -47,7 +47,7 @@ public class Wall : MonoBehaviour
                 return;
             }                                
             else if (collider.gameObject.tag == "Wall" ) 
-            { 
+            {                
                return;               
             }            
         }  
