@@ -35,7 +35,7 @@ public class CoinManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
-        Debug.Log("Added " + amount + " coins. Total coins: " + coins);
+       // Debug.Log("Added " + amount + " coins. Total coins: " + coins);
         refreshDisplay();
     }
 

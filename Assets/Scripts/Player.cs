@@ -62,14 +62,14 @@ public class Player : MonoBehaviour
 
     public void ReceiveCoins(int amount)
     {   
-        Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());                          
+    //    Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());                          
         CoinManager.Instance.AddCoins(amount);
        // Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());
     }   
 
      public void ReceiveExp(int amount)
     {   
-        Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());                          
+    //    Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());                          
         ExpManager.Instance.AddExp(amount);
        // Debug.Log("Received " + amount + " coins. Total coins: " + CoinManager.Instance.GetCoins());
     }    
