@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public float moveSpeed = 0.01f;
+    public float moveSpeed = 0.1f;
     public float maxHealth = 100f;
     public float currentHealth;
     public float timeUnitlDeath = 50f;
@@ -13,6 +13,11 @@ public class Enemy : MonoBehaviour
     public Slider healthSlider;
 
     [SerializeField] private Transform baseTransform;
+
+     private bool isBeingPulled = false; // Überprüft, ob der Feind gerade zum Magneten gezogen wird
+private Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
+private float pullDuration = 5f; // Die Dauer, für die der Feind zum Magneten gezogen wird
+private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolgen
 
     void Start()
     {
@@ -34,7 +39,27 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
+        if(isBeingPulled)
+        {
+            // Bewegen Sie den Feind zur Magnetenposition
+            transform.position = Vector3.MoveTowards(transform.position, magnetPosition, moveSpeed * Time.deltaTime * 50);
+
+            
+
+            // Überprüfen, ob die Ziehzeit abgelaufen ist
+            if(pullTimer >= pullDuration)
+            {
+                isBeingPulled = false;
+                pullTimer = 0f;
+            } else
+            {
+                pullTimer += Time.deltaTime;
+            }
+        }
+        else
+        {
         MoveTowardsCenter();
+        }
     }
 
     void MoveTowardsCenter()
@@ -55,24 +80,9 @@ public class Enemy : MonoBehaviour
         {
             // Wenn der Feind eine Wand ber�hrt, soll keine Aktion ausgef�hrt werden
             // Sie k�nnen hier optional zus�tzliche Aktionen hinzuf�gen
-            Debug.Log("Wall Hit");
-        }
-
-
-        if (collision.gameObject.name == "Bomb")
-        {
-            Debug.Log("Bomb Hit");
-            // Partice effect
-            //  GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            //  Destroy(explosion, 1f);
-            //  Destroy(gameObject);
-            //  Destroy(collision.gameObject);   
-
-            Destroy(gameObject);
-        }
-
-    }
-
+            Debug.Log("Wall Hit");        }          
+    
+    }      
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -94,12 +104,36 @@ public class Enemy : MonoBehaviour
             Die();
         }
 
-        //  if (collision.gameObject.tag == "Wall")
-        //  {  Debug.Log("Wall Hit");             
-        // Destroy(gameObject); // Hier halt Ki zeug das der enemy woanders lang geht
-        // }      
+  //  if (collision.gameObject.tag == "Wall")
+  //  {  Debug.Log("Wall Hit");             
+      // Destroy(gameObject); // Hier halt Ki zeug das der enemy woanders lang geht -- Edit: Vlt auch nicht lol
+   // }    
 
-    }
+   if (collision.gameObject.name == "Bomb")
+    {   
+      Debug.Log("Bomb Hit in Enemy");     
+      Die();
+    }        
+
+    
+   if (collision.gameObject.name == "EMP")
+    {   
+      Debug.Log("EMP Hit in Enemy");     
+      // Stun the enemy for 3 seconds
+        
+        moveSpeed = 0f;
+        Invoke("ResetSpeed", 3f);             
+      
+    }    
+
+    if (collision.gameObject.name == "Magnet")
+    {   
+      Debug.Log("Magnet Hit in Enemy");     
+      isBeingPulled = true;
+      magnetPosition = collision.transform.position;
+    }     
+   
+    }    
 
 
     void LowerHealth()
@@ -116,6 +150,7 @@ public class Enemy : MonoBehaviour
         // �berpr�fen Sie, ob der Feind keine Gesundheit mehr hat
         if (currentHealth <= 0f)
         {
+            Player.instance.ReceiveCoins(100);
             Die();
         }
     }
@@ -123,10 +158,15 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         // Informieren Sie den RoundManager, dass dieser Feind gestorben ist
-        RoundManager.Instance.DecreaseEnemyCount(gameObject);
-
+        RoundManager.Instance.DecreaseEnemyCount(gameObject);       
+        
         // Fügen Sie hier die Logik hinzu, die ausgeführt wird, wenn der Feind stirbt
         Destroy(gameObject);
+    }
+
+    void ResetSpeed()
+    {
+        moveSpeed = 1f;
     }
 
 }

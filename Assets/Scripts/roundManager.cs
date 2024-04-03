@@ -185,7 +185,8 @@ public class RoundManager : MonoBehaviour
         if (currentEnemies.Count == 0 && lockRound == false)
         {
             currentRound++; // Erh�hen Sie die Rundennummer
-            lockRound = true;
+            lockRound = true;           
+            Player.instance.ReceiveCoins(150);
             Invoke("StartNewRound", 3);
             //StartNewRound(); // Starten Sie die n�chste Runde
         }

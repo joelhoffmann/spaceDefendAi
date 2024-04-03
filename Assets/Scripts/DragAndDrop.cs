@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public Animator shopAnimator;
-    Transform image;
+    
+    Transform image;    
     GameObject dragObject;
     bool draggeble = false;
     private Vector3 originalScale;
@@ -19,7 +20,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        image = transform.Find("itemImage");
+        image = transform.Find("itemImage");              
         int costNumber;
         int.TryParse(transform.Find("costText").GetComponent<TextMeshProUGUI>().text, out costNumber);
 
@@ -27,11 +28,13 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         if (draggeble)
         {
             dragObject = Instantiate(image.gameObject, image.position, image.rotation, transform);
-            dragObject.name = transform.name;
-            dragObject.transform.parent = GameObject.Find("activeItemContainer").transform;
-            shopAnimator.SetBool("isShopOpen", false);
+            dragObject.name = transform.name;            
 
-            dragObject.transform.localScale = originalScale * 1.7f; // Hier können Sie den Vergrößerungsfaktor anpassen
+            dragObject.transform.parent = GameObject.Find("activeItemContainer").transform;
+            shopAnimator.SetBool("isShopOpen", false); 
+            ShopButtonController.instance.isShopOpen = false;           
+
+            dragObject.transform.localScale = originalScale * 1.7f; // Hier kï¿½nnen Sie den Vergrï¿½ï¿½erungsfaktor anpassen      
 
             dragObject.transform.SetAsLastSibling();
         }
@@ -49,10 +52,30 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     public void OnEndDrag(PointerEventData eventData)
     {
         if (draggeble && dragObject != null)
-        {
+        {           
+            // HinzufÃ¼gen eines Colliders zum dragObject
+            CircleCollider2D dragCollider = dragObject.AddComponent<CircleCollider2D>();
+            dragCollider.radius = 200f;
+            dragCollider.isTrigger = true;
+
             dragObject.transform.localScale = originalScale;
+
+            // wait and then destroy the dragObject
+            if (dragObject.name == "Bomb" || dragObject.name == "EMP"){
+            StartCoroutine(DestroyDragObject(0.1f));
+            } else if (dragObject.name == "Magnet")
+            {
+                StartCoroutine(DestroyDragObject(5f));
+            }
+            
         }
 
+    }
+
+    private IEnumerator DestroyDragObject(float time)
+    {
+        yield return new WaitForSeconds(time);
+        Destroy(dragObject);
     }
 
 }

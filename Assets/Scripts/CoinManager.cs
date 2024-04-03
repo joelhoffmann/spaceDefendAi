@@ -35,7 +35,7 @@ public class CoinManager : MonoBehaviour
     public void AddCoins(int amount)
     {
         coins += amount;
-        Debug.Log("Added " + amount + " coins. Total coins: " + coins);
+       // Debug.Log("Added " + amount + " coins. Total coins: " + coins);
         refreshDisplay();
     }
 
@@ -62,7 +62,7 @@ public class CoinManager : MonoBehaviour
 
     private void refreshDisplay()
     {
-        GameObject.Find("CoinDisplay").GetComponent<TextMeshProUGUI>().text = coins.ToString();
+        GameObject.Find("CoinDisplay").GetComponent<TextMeshProUGUI>().text = "Coins: " + coins.ToString();
 
     }
 }

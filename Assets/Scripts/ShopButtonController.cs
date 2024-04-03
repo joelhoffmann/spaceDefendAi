@@ -5,17 +5,24 @@ using UnityEngine;
 public class ShopButtonController : MonoBehaviour
 {
     public Animator shopAnimator;
-    private bool isShopOpen = false;
-
+    public bool isShopOpen = false;  
+    public static ShopButtonController instance;     
+  
     private void Start()
     {
-        shopAnimator.SetBool("isShopOpen", isShopOpen);
+        instance = this; 
+        shopAnimator.SetBool("isShopOpen", isShopOpen);                           
     }
 
     public void ToggleShopState()
     {
         isShopOpen = !shopAnimator.GetBool("isShopOpen");
-        shopAnimator.SetBool("isShopOpen", isShopOpen);
+        shopAnimator.SetBool("isShopOpen", isShopOpen);        
     }
-
+    
+    // get the current state of the shop
+    public bool GetShopState()
+    {
+        return isShopOpen;
+    }
 }
