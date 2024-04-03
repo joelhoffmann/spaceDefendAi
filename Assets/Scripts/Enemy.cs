@@ -6,13 +6,13 @@ public class Enemy : MonoBehaviour
     public float moveSpeed = 0.1f;
     public float maxHealth = 100f;
     public float currentHealth;
-    public float timeUnitlDeath = 5f;
+    public float timeUnitlDeath = 50f;
 
     public int damage = 10;
 
     public Slider healthSlider;
 
-     [SerializeField] private Transform baseTransform;
+    [SerializeField] private Transform baseTransform;
 
      private bool isBeingPulled = false; // Überprüft, ob der Feind gerade zum Magneten gezogen wird
 private Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
@@ -21,7 +21,7 @@ private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolge
 
     void Start()
     {
-        currentHealth = maxHealth;      
+        currentHealth = maxHealth;
 
         // Initialisieren Sie den Slider, wenn er zugewiesen ist
         if (healthSlider != null)
@@ -74,34 +74,35 @@ private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolge
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-    {        
+    {
         // �berpr�fen Sie, ob die Kollision mit einer Wand erfolgt
         if (collision.gameObject.CompareTag("Wall"))
         {
             // Wenn der Feind eine Wand ber�hrt, soll keine Aktion ausgef�hrt werden
             // Sie k�nnen hier optional zus�tzliche Aktionen hinzuf�gen
-            Debug.Log("Wall Hit");
-        }          
+            Debug.Log("Wall Hit");        }          
     
-    }   
-    
+    }      
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Enter Trigger " + collision.gameObject.tag + " " + collision.gameObject.name);     
-        
+        Debug.Log("Enter Trigger " + collision.gameObject.tag + " " + collision.gameObject.name);
+
         if (collision.gameObject.tag == "Base")
 
-    {   Debug.Log("Base Hit");   
-        Player.instance.TakeDamage(damage);
+        {
+            Debug.Log("Base Hit");
+            Player.instance.TakeDamage(damage);
             Die();
-        }    
+        }
 
-    if (collision.gameObject.tag == "Shield")
-    {   Debug.Log("Shield Hit");   
-        Player.instance.TakeShieldDamage(damage);
+        if (collision.gameObject.tag == "Shield")
+        {
+            Debug.Log("Shield Hit");
+            Player.instance.TakeShieldDamage(damage);
             Die();
-    }    
+        }
 
   //  if (collision.gameObject.tag == "Wall")
   //  {  Debug.Log("Wall Hit");             
@@ -133,6 +134,7 @@ private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolge
     }     
    
     }    
+
 
     void LowerHealth()
     {
