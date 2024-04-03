@@ -11,7 +11,7 @@ public class RoundManager : MonoBehaviour
     public int startEnemyCount = 3; // Anzahl der Feinde zu Beginn
     public int enemyIncreasePerRound = 1; // Anzahl der zusaetzlichen Feinde pro Runde
     public GameObject[] spawnPoints; //Spawnpoints welche die enemy directions bestimmen
-    public List<Transform> inActiveSpawnPoints = new List<Transform>();
+    public List<Transform> inactiveSpawnPoints = new List<Transform>();
     public List<Transform> activeSpawnPoints = new List<Transform>();
 
 
@@ -53,14 +53,14 @@ public class RoundManager : MonoBehaviour
 
         if (spawnPoints.Length > 0)
         {
-            inActiveSpawnPoints = new List<Transform>();
+            inactiveSpawnPoints = new List<Transform>();
             for (int i = 0; i < spawnPoints.Length; i++)
             {
-                inActiveSpawnPoints.Add(spawnPoints[i].transform);
+                inactiveSpawnPoints.Add(spawnPoints[i].transform);
             }
 
             Debug.Log("initiated spawnpints");
-            Debug.Log("inActiveSpawnPoints: " + inActiveSpawnPoints.Count);
+            Debug.Log("inActiveSpawnPoints: " + inactiveSpawnPoints.Count);
         }
 
         else
@@ -166,8 +166,8 @@ public class RoundManager : MonoBehaviour
         while (newSpawnPointFound == false)
         {
             //get random spawnpoint from inactive spawnpoints
-            int randomIndex = Random.Range(0, inActiveSpawnPoints.Count);
-            Transform newRandomSpawnPoint = inActiveSpawnPoints[randomIndex];
+            int randomIndex = Random.Range(0, inactiveSpawnPoints.Count);
+            Transform newRandomSpawnPoint = inactiveSpawnPoints[randomIndex];
             //check if random spawnpoint is already in active spawnpoints
             if (!activeSpawnPoints.Contains(newRandomSpawnPoint))
             {
