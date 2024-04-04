@@ -44,8 +44,6 @@ private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolge
             // Bewegen Sie den Feind zur Magnetenposition
             transform.position = Vector3.MoveTowards(transform.position, magnetPosition, moveSpeed * Time.deltaTime * 50);
 
-            
-
             // Überprüfen, ob die Ziehzeit abgelaufen ist
             if(pullTimer >= pullDuration)
             {

@@ -11,7 +11,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     Transform image;    
     GameObject dragObject;
     bool draggeble = false;
-    private Vector3 originalScale;
+    private Vector3 originalScale; 
 
     private void Awake()
     {
@@ -28,16 +28,18 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         if (draggeble)
         {
             dragObject = Instantiate(image.gameObject, image.position, image.rotation, transform);
-            dragObject.name = transform.name;            
+            dragObject.name = transform.name;   
 
             dragObject.transform.parent = GameObject.Find("activeItemContainer").transform;
             shopAnimator.SetBool("isShopOpen", false); 
             ShopButtonController.instance.isShopOpen = false;           
 
-            dragObject.transform.localScale = originalScale * 1.7f; // Hier k�nnen Sie den Vergr��erungsfaktor anpassen      
+            dragObject.transform.localScale = originalScale * 1.7f; // Hier k�nnen Sie den Vergr��erungsfaktor anpassen 
 
-            dragObject.transform.SetAsLastSibling();
+            dragObject.transform.SetAsLastSibling();        
+
         }
+        
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -45,7 +47,7 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         if (draggeble)
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            dragObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, dragObject.transform.position.z);
+            dragObject.transform.position = new Vector3(mousePosition.x, mousePosition.y, dragObject.transform.position.z);  
         }
     }
 
@@ -55,8 +57,9 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
         {           
             // Hinzufügen eines Colliders zum dragObject
             CircleCollider2D dragCollider = dragObject.AddComponent<CircleCollider2D>();
+
             dragCollider.radius = 200f;
-            dragCollider.isTrigger = true;
+            dragCollider.isTrigger = true; 
 
             dragObject.transform.localScale = originalScale;
 
@@ -70,11 +73,12 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             
         }
 
-    }
+    }  
 
     private IEnumerator DestroyDragObject(float time)
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time);       
+        
         Destroy(dragObject);
     }
 

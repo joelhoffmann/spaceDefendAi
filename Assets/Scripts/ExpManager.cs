@@ -63,4 +63,10 @@ public class ExpManager : MonoBehaviour
         GameObject.Find("ExpDisplay").GetComponent<TextMeshProUGUI>().text = "Stardust: " + exp.ToString();
 
     }
+
+      public void ResetExp()
+    {
+        exp = 0;
+        refreshDisplay();
+    }
 }

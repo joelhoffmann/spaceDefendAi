@@ -111,7 +111,8 @@ public class Player : MonoBehaviour
     {
         health = 100;
         shieldHealth = 100;
-        experience = 0;
+        ExpManager.Instance.ResetExp();
+        CoinManager.Instance.ResetCoins();
         gameObject.SetActive(true);   
     }
 }

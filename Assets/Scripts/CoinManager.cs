@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -64,5 +65,11 @@ public class CoinManager : MonoBehaviour
     {
         GameObject.Find("CoinDisplay").GetComponent<TextMeshProUGUI>().text = "Coins: " + coins.ToString();
 
+    }
+
+    public void ResetCoins()
+    {
+        coins = 1000;
+        refreshDisplay();
     }
 }
