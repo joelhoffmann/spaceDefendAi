@@ -17,25 +17,31 @@ public class EnemyAgent : Agent
         rBody = GetComponent<Rigidbody2D>();
     }
 
-    public Transform target;
+    public GameObject baseTarget;
+
+    private Transform target;
     public float spawnRadius = 5.0f;
-    public GameObject wall;
-    public int wallCount = 3;
     List<GameObject> walls = new List<GameObject>();
     
-    public float wallRadius = 4.0f;
 
+
+    public void Awake()
+    {
+        target = baseTarget.transform;
+
+    }
     public override void OnEpisodeBegin()
     {
         //spawn walls randomly in a circle around the target
         float wallAngle;
         Vector3 wallNewPos;
-        for(int i = 0; i < wallCount; i++)
+        /*for(int i = 0; i < wallCount; i++)
         {
             wallAngle = Random.Range(0.0f, 2 * Mathf.PI);
             wallNewPos = new Vector3(Mathf.Cos(wallAngle) * wallRadius, Mathf.Sin(wallAngle) * wallRadius, 0.0f);
             walls.Add(Instantiate(wall, target.position + wallNewPos, Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f))));
         }
+        */
         
 
         // reset the velocity

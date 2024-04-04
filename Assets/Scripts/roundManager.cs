@@ -7,18 +7,14 @@ public class RoundManager : MonoBehaviour
 {
     public static RoundManager instance;
 
-    public float spawnInterval = 2f; // Intervall fuer das Spawnen von Feinden
-    public int startEnemyCount = 3; // Anzahl der Feinde zu Beginn
-    public int enemyIncreasePerRound = 1; // Anzahl der zusaetzlichen Feinde pro Runde
     public GameObject[] spawnPoints; //Spawnpoints welche die enemy directions bestimmen
     public List<Transform> inactiveSpawnPoints = new List<Transform>();
     public List<Transform> activeSpawnPoints = new List<Transform>();
 
 
     private Transform container;
-    private Transform enemyTemplate;
-    private GameObject enemyPrefab; // Das Feind-Prefab
-    private int currentRound = 1; // Aktuelle Runde
+    public GameObject enemyPrefab; // Das Feind-Prefab
+    private int currentRound = 0; // Aktuelle Runde
     private List<GameObject> currentEnemies = new List<GameObject>(); // Liste der aktuellen Feinde
     private bool lockRound = false;
     private int enemiesPerWave = 0;
@@ -43,9 +39,8 @@ public class RoundManager : MonoBehaviour
 
     void Awake()
     {
-
         container = GameObject.Find("activeEnemyContainer").transform;
-        enemyPrefab = Resources.Load<GameObject>("enemyTemplate"); // Setze das Prefab aus den Ressourcen
+        //enemyPrefab = Resources.Load<GameObject>("enemyTemplate"); // Setze das Prefab aus den Ressourcen
         if (enemyPrefab == null)
         {
             Debug.LogError("Enemy Prefab not found! Make sure to place the prefab in a Resources folder.");
@@ -62,7 +57,6 @@ public class RoundManager : MonoBehaviour
             Debug.Log("initiated spawnpints");
             Debug.Log("inActiveSpawnPoints: " + inactiveSpawnPoints.Count);
         }
-
         else
         {
             Debug.LogError("No spawn points found! Make sure to place the spawn points in the scene.");
@@ -100,7 +94,7 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-
+    
     void SpawnEnemy()
     {
         // W�hlen Sie eine zuf�llige Position um den Bildschirmrand aus
