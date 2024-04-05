@@ -167,6 +167,7 @@ public class EnemyAgent : Agent
         {   
             Debug.Log("EMP Hit in Enemy");
             moveSpeed = 0f;
+            rotateSpeed = 0f;
             Invoke("ResetSpeed", 3f);  
             collisionType = 0;         
         }else if (collisionType == 5)
@@ -184,6 +185,7 @@ public class EnemyAgent : Agent
      void ResetSpeed()
     {
         moveSpeed = 50;
+        rotateSpeed = 5;
     }
 
        void LowerHealth()
