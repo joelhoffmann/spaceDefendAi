@@ -54,8 +54,8 @@ public class RoundManager : MonoBehaviour
                 inactiveSpawnPoints.Add(spawnPoints[i].transform);
             }
 
-            Debug.Log("initiated spawnpints");
-            Debug.Log("inActiveSpawnPoints: " + inactiveSpawnPoints.Count);
+        //    Debug.Log("initiated spawnpints");
+        //    Debug.Log("inActiveSpawnPoints: " + inactiveSpawnPoints.Count);
         }
         else
         {
@@ -73,7 +73,7 @@ public class RoundManager : MonoBehaviour
 
     void StartNewRound()
     {
-        Debug.Log("Starting Round " + currentRound);
+       // Debug.Log("Starting Round " + currentRound);
         GameObject.Find("roundDisplay").GetComponent<TextMeshProUGUI>().text = "Round " + currentRound.ToString();
         lockRound = false;
         CoinManager.Instance.AddCoins(1000);
@@ -86,7 +86,7 @@ public class RoundManager : MonoBehaviour
 
         // Spawnen Sie die Feinde f�r die aktuelle Runde
         enemiesPerWave = (int)(0.5 * currentRound + 1);
-        print("enemiesPerWave: " + enemiesPerWave);
+       // print("enemiesPerWave: " + enemiesPerWave);
 
         for (int i = 0; i < enemiesPerWave; i++)
         {
@@ -138,7 +138,7 @@ public class RoundManager : MonoBehaviour
         }
         */
         //get random spawnpoint from active spawnpoints
-        Debug.Log("activeSpawnPoints: " + activeSpawnPoints.Count);
+       // Debug.Log("activeSpawnPoints: " + activeSpawnPoints.Count);
         int randomIndex = Random.Range(0, activeSpawnPoints.Count);
         Transform randomSpawnPoint = activeSpawnPoints[randomIndex];
         // add varition from spawPoint direction +/- 1f
@@ -150,7 +150,7 @@ public class RoundManager : MonoBehaviour
 
     public void DecreaseEnemyCount(GameObject enemy)
     {
-        Debug.Log("----------------sdffghgd-------------------");
+     //   Debug.Log("----------------sdffghgd-------------------");
         currentEnemies.Remove(enemy);
     }
 

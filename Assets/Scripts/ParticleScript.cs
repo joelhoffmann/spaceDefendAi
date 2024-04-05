@@ -12,8 +12,8 @@ public class ParticleScript : MonoBehaviour
         if (Player.instance.shieldHealth <= 0)
         {
             GetComponent<SpriteRenderer>().enabled = false;
-        GetComponent<Collider2D>().enabled = false;            
-        }         
+            GetComponent<Collider2D>().enabled = false;                        
+        }        
         
     }
     }
