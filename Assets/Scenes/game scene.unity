@@ -1206,6 +1206,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2321051783380503261, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ad9a5639ca096fe4087ff2f39f392b2d, type: 3}
+    - target: {fileID: 2321051783380503261, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+      propertyPath: m_Color.g
+      value: 0.047468763
+      objectReference: {fileID: 0}
+    - target: {fileID: 2321051783380503261, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3148227582529112171, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
       propertyPath: antenna
       value: 
@@ -1270,9 +1282,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4393709508134550946, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4438908856535861612, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5343350875900718285, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
       propertyPath: m_IsTrigger
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7456033305996991540, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+      propertyPath: m_Color.g
+      value: 0.058691293
+      objectReference: {fileID: 0}
+    - target: {fileID: 7456033305996991540, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9115446985968052994, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
       propertyPath: m_Name
