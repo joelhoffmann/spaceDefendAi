@@ -14,10 +14,10 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private Transform baseTransform;
 
-     private bool isBeingPulled = false; // Überprüft, ob der Feind gerade zum Magneten gezogen wird
-private Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
-private float pullDuration = 5f; // Die Dauer, für die der Feind zum Magneten gezogen wird
-private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolgen
+    private bool isBeingPulled = false; // Überprüft, ob der Feind gerade zum Magneten gezogen wird
+    private Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
+    private float pullDuration = 5f; // Die Dauer, für die der Feind zum Magneten gezogen wird
+    private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolgen
 
     void Start()
     {
@@ -39,26 +39,27 @@ private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolge
 
     void Update()
     {
-        if(isBeingPulled)
+        if (isBeingPulled)
         {
             // Bewegen Sie den Feind zur Magnetenposition
             transform.position = Vector3.MoveTowards(transform.position, magnetPosition, moveSpeed * Time.deltaTime * 50);
 
-            
+
 
             // Überprüfen, ob die Ziehzeit abgelaufen ist
-            if(pullTimer >= pullDuration)
+            if (pullTimer >= pullDuration)
             {
                 isBeingPulled = false;
                 pullTimer = 0f;
-            } else
+            }
+            else
             {
                 pullTimer += Time.deltaTime;
             }
         }
         else
         {
-        MoveTowardsCenter();
+            MoveTowardsCenter();
         }
     }
 
@@ -80,9 +81,10 @@ private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolge
         {
             // Wenn der Feind eine Wand ber�hrt, soll keine Aktion ausgef�hrt werden
             // Sie k�nnen hier optional zus�tzliche Aktionen hinzuf�gen
-            Debug.Log("Wall Hit");        }          
-    
-    }      
+            Debug.Log("Wall Hit");
+        }
+
+    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -104,36 +106,36 @@ private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolge
             Die();
         }
 
-  //  if (collision.gameObject.tag == "Wall")
-  //  {  Debug.Log("Wall Hit");             
-      // Destroy(gameObject); // Hier halt Ki zeug das der enemy woanders lang geht -- Edit: Vlt auch nicht lol
-   // }    
+        //  if (collision.gameObject.tag == "Wall")
+        //  {  Debug.Log("Wall Hit");             
+        // Destroy(gameObject); // Hier halt Ki zeug das der enemy woanders lang geht -- Edit: Vlt auch nicht lol
+        // }    
 
-   if (collision.gameObject.name == "Bomb")
-    {   
-      Debug.Log("Bomb Hit in Enemy");     
-      Die();
-    }        
+        if (collision.gameObject.name == "Bomb")
+        {
+            Debug.Log("Bomb Hit in Enemy");
+            Die();
+        }
 
-    
-   if (collision.gameObject.name == "EMP")
-    {   
-      Debug.Log("EMP Hit in Enemy");     
-      // Stun the enemy for 3 seconds
-        
-        moveSpeed = 0f;
-        Invoke("ResetSpeed", 3f);             
-      
-    }    
 
-    if (collision.gameObject.name == "Magnet")
-    {   
-      Debug.Log("Magnet Hit in Enemy");     
-      isBeingPulled = true;
-      magnetPosition = collision.transform.position;
-    }     
-   
-    }    
+        if (collision.gameObject.name == "EMP")
+        {
+            Debug.Log("EMP Hit in Enemy");
+            // Stun the enemy for 3 seconds
+
+            moveSpeed = 0f;
+            Invoke("ResetSpeed", 3f);
+
+        }
+
+        if (collision.gameObject.name == "Magnet")
+        {
+            Debug.Log("Magnet Hit in Enemy");
+            isBeingPulled = true;
+            magnetPosition = collision.transform.position;
+        }
+
+    }
 
 
     void LowerHealth()
@@ -158,8 +160,8 @@ private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolge
     void Die()
     {
         // Informieren Sie den RoundManager, dass dieser Feind gestorben ist
-        RoundManager.Instance.DecreaseEnemyCount(gameObject);       
-        
+        RoundManager.Instance.DecreaseEnemyCount(gameObject);
+
         // Fügen Sie hier die Logik hinzu, die ausgeführt wird, wenn der Feind stirbt
         Destroy(gameObject);
     }
