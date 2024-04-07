@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1);
             roundTimer--;
         }
-        Debug.Log("Round " + roundNumber + " is over!");
+       // Debug.Log("Round " + roundNumber + " is over!");
         // Player.instance.ClearWalls(); 
         if (!AreEnemiesRemaining())
             StartNewRound();
@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void StartNewRound()
     {
-        Debug.Log("Starting Round " + roundNumber);
+        //Debug.Log("Starting Round " + roundNumber);
         // Hier kannst du die Logik implementieren, um den Spielern Coins zuzuweisen
         // Zum Beispiel könntest du auf die Spielerinstanz zugreifen und die Methode zum Erhalten von Coins aufrufen
         if (Player.instance != null)

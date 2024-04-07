@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         shieldHealth -= damage;
       //  Debug.Log("Shield health: " + shieldHealth);
 
-        if (shieldHealth < 0)
+        if (shieldHealth == 0)
         {
             DestroyShield();
            //Debug.Log("Shield destroyed");
@@ -92,8 +92,7 @@ public class Player : MonoBehaviour
     {             
         // Deaktiviere das Schild-GameObject
         GameObject shield = GameObject.FindGameObjectWithTag("Shield");
-        shield.SetActive(false);          
-       
+        shield.SetActive(false); 
     }
 
      IEnumerator CallMethodAfterDelay()
