@@ -15,7 +15,7 @@ public class RoundManager : MonoBehaviour
     private Transform container;
     public GameObject enemyPrefab; // Das Feind-Prefab
     private int currentRound = 0; // Aktuelle Runde
-    private List<GameObject> currentEnemies = new List<GameObject>() ; // Liste der aktuellen Feinde
+    private List<GameObject> currentEnemies = new List<GameObject>(); // Liste der aktuellen Feinde
     private bool lockRound = false;
     private int enemiesPerWave = 0;
 
@@ -51,7 +51,7 @@ public class RoundManager : MonoBehaviour
         resultScreenInstance = Instantiate(ResultScreen).GetComponent<UIDocument>();
         root = resultScreenInstance.rootVisualElement;
         root.style.display = DisplayStyle.None;
-        
+
 
 
 
@@ -118,8 +118,8 @@ public class RoundManager : MonoBehaviour
         // W�hlen Sie eine zuf�llige Position um den Bildschirmrand aus
         Vector3 randomSpawnPosition = GetRandomSpawnPosition();
 
-        GameObject newEnemyObject = Instantiate(enemyPrefab, container); 
-        Debug.Log("newEnemyObject: " + newEnemyObject);      
+        GameObject newEnemyObject = Instantiate(enemyPrefab, container);
+        Debug.Log("newEnemyObject: " + newEnemyObject);
 
         // Kopieren Sie die Position des Spawnpunkts, um sie zu ändern
         Vector3 adjustedSpawnPosition = randomSpawnPosition;
@@ -147,10 +147,10 @@ public class RoundManager : MonoBehaviour
 
     public void DecreaseEnemyCount(GameObject enemy)
     {
-       Debug.Log("----------------sdffghgd-------------------");
-       currentEnemies.Remove(enemy);
-       // Destroy(enemy);
-        Debug.Log("currentEnemies: " + currentEnemies.Count);  
+        Debug.Log("----------------sdffghgd-------------------");
+        currentEnemies.Remove(enemy);
+        // Destroy(enemy);
+        Debug.Log("currentEnemies: " + currentEnemies.Count);
     }
 
     private void addNewActiveSpawnPoint()
@@ -178,34 +178,34 @@ public class RoundManager : MonoBehaviour
     }
 
     private void StopEnemySpawn()
-    {
-
+    {         
+        lockRound = true;        
+        CancelInvoke("SpawnEnemy");               
     }
 
     private void ShowRunEndingScreen()
     {
         Debug.Log("PLAYER DEATH EVENT TRIGGERED");
-        m_AudioManager.PlaySFX(m_AudioManager.gameOver);
+        //m_AudioManager.PlaySFX(m_AudioManager.gameOver);
         root.style.display = DisplayStyle.Flex;
         restartButton = root.Query<Button>("RestartButton").First();
         restartButton.clicked += OnRestartButtonClicked;
     }
 
     void OnRestartButtonClicked()
-    {
-      // Handle the button click event here
-      Debug.Log("Restart button clicked!");
+    {    
+        Debug.Log("Restart button clicked!");        
+        UnityEngine.SceneManagement.SceneManager.LoadScene("game scene");
     }
 
 
     void Update()
-    {
-        // �berpr�fen Sie, ob alle Feinde besiegt wurden
+    {  
         if (currentEnemies.Count == 0 && lockRound == false)
         {
             Debug.Log("Round Over!");
             currentRound++; // Erh�hen Sie die Rundennummer
-            lockRound = true;           
+            lockRound = true;
             Player.instance.ReceiveCoins(150);
             Invoke("StartNewRound", 3);
             //StartNewRound(); // Starten Sie die n�chste Runde

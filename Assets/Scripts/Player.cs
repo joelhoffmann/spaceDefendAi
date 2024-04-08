@@ -57,7 +57,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Player died");  
            // Informieren Sie den RoundManager, dass dieser Feind gestorben ist
-        RoundManager.Instance.DecreaseEnemyCount(gameObject);
+       // RoundManager.Instance.DecreaseEnemyCount(gameObject);
 
         OnPlayerDeath?.Invoke();
 
@@ -97,7 +97,7 @@ public class Player : MonoBehaviour
     private void DestroyShield()
     {
         // Deaktiviere das Schild-GameObject
-        OnPlayerDeath?.Invoke();
+        //OnPlayerDeath?.Invoke();
         GameObject shield = GameObject.FindGameObjectWithTag("Shield");
         shield.SetActive(false);
     }

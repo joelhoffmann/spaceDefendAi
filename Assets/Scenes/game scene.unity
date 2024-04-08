@@ -502,8 +502,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 284.8, y: -0.000065804}
-  m_SizeDelta: {x: 210.99, y: 50}
+  m_AnchoredPosition: {x: 272.81, y: -0.000065804}
+  m_SizeDelta: {x: 234.97, y: 50}
   m_Pivot: {x: 0.5, y: 0.49999896}
 --- !u!114 &151093182
 MonoBehaviour:
@@ -2090,10 +2090,8 @@ MonoBehaviour:
   - {fileID: 1959583319}
   inactiveSpawnPoints: []
   activeSpawnPoints: []
-  enemyPrefab: {fileID: 533061479079027630, guid: 57ddac98fb0b2c241b03abbd37a59292, type: 3}
-  baseTarget: {fileID: 2140733259}
-  nexatronPrefab: {fileID: 9115446985968052994, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
-  ResultScreen: {fileID: 0}
+  enemyPrefab: {fileID: 9115446985968052994, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+  ResultScreen: {fileID: 551820843196512519, guid: 6da0a3e1d2db4fb46b30312b573fdb9f, type: 3}
 --- !u!1 &1395167483
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,16 +21,16 @@ public class EnemyAntenna : MonoBehaviour
         if (collision.gameObject.tag == "Shield")
         {
             Debug.Log("Shield Hit");           
-            Player.instance.TakeDamage(damage);
+            Player.instance.TakeShieldDamage(damage);
             RoundManager.Instance.DecreaseEnemyCount(transform.parent.gameObject);
             Destroy(transform.parent.gameObject);               
         }
 
         if (collision.gameObject.name == "Bomb")
         {
-            Debug.Log("Bomb Hit");      
-            Player.instance.TakeDamage(damage);
-            RoundManager.Instance.DecreaseEnemyCount(transform.parent.gameObject);                   
+            Debug.Log("Bomb Hit");
+            RoundManager.Instance.DecreaseEnemyCount(transform.parent.gameObject);  
+            Destroy(transform.parent.gameObject);                  
         }
 
         if (collision.gameObject.name == "EMP")
@@ -38,7 +38,7 @@ public class EnemyAntenna : MonoBehaviour
            Debug.Log("EMP Hit");
            transform.parent.gameObject.GetComponent<EnemyAgent>().moveSpeed = 0f;  
            transform.parent.gameObject.GetComponent<EnemyAgent>().rotateSpeed = 0f;
-           transform.parent.gameObject.GetComponent<EnemyAgent>().Invoke("ResetSpeed", 5f);
+           transform.parent.gameObject.GetComponent<EnemyAgent>().Invoke("ResetSpeed", 7f);
         }
 
         if (collision.gameObject.name == "Magnet")
