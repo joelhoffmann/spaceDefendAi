@@ -76,7 +76,7 @@ public class RoundManager : MonoBehaviour
        // Debug.Log("Starting Round " + currentRound);
         GameObject.Find("roundDisplay").GetComponent<TextMeshProUGUI>().text = "Round " + currentRound.ToString();
         lockRound = false;
-        CoinManager.Instance.AddCoins(1000);
+        CoinManager.Instance.AddCoins(200);
 
         if (currentRound == 1 || (currentRound % 5 == 0 && activeSpawnPoints.Count <= spawnPoints.Length && currentRound < 20 ))
         {
@@ -100,7 +100,8 @@ public class RoundManager : MonoBehaviour
         // W�hlen Sie eine zuf�llige Position um den Bildschirmrand aus
         Vector3 randomSpawnPosition = GetRandomSpawnPosition();
 
-        GameObject newEnemyObject = Instantiate(enemyPrefab, container);
+        GameObject newEnemyObject = Instantiate(enemyPrefab, container); 
+        Debug.Log("newEnemyObject: " + newEnemyObject);      
 
         // Kopieren Sie die Position des Spawnpunkts, um sie zu ändern
         Vector3 adjustedSpawnPosition = randomSpawnPosition;
@@ -114,7 +115,7 @@ public class RoundManager : MonoBehaviour
     }
 
     Vector3 GetRandomSpawnPosition()
-    {
+    {        
         /*
         float screenWidth = Camera.main.orthographicSize * 2f * Screen.width / Screen.height;
         float screenHeight = Camera.main.orthographicSize * 2f;
@@ -150,8 +151,10 @@ public class RoundManager : MonoBehaviour
 
     public void DecreaseEnemyCount(GameObject enemy)
     {
-     //   Debug.Log("----------------sdffghgd-------------------");
+        Debug.Log("----------------sdffghgd-------------------");                            
         currentEnemies.Remove(enemy);
+       // Destroy(enemy);
+        Debug.Log("currentEnemies: " + currentEnemies.Count);  
     }
 
     private void addNewActiveSpawnPoint()
@@ -178,6 +181,7 @@ public class RoundManager : MonoBehaviour
         // �berpr�fen Sie, ob alle Feinde besiegt wurden
         if (currentEnemies.Count == 0 && lockRound == false)
         {
+            Debug.Log("Round Over!");
             currentRound++; // Erh�hen Sie die Rundennummer
             lockRound = true;           
             Player.instance.ReceiveCoins(150);

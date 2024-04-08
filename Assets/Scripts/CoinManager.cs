@@ -5,7 +5,7 @@ public class CoinManager : MonoBehaviour
 {
     private static CoinManager instance;
 
-    private int coins = 1000;
+    private int coins = 100;
 
     public int wallCost = 10; // make it private!
 
