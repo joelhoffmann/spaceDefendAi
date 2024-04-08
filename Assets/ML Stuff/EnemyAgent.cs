@@ -27,7 +27,8 @@ public class EnemyAgent : Agent
     private Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
     private float pullDuration = 5f; // Die Dauer, für die der Feind zum Magneten gezogen wird
     private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolgen
-    public Transform target;
+    public GameObject baseTarget;
+    private Transform target;
     public float spawnRadius = 10f;
     private bool enemyDead = false;
     void Start()
@@ -47,6 +48,11 @@ public class EnemyAgent : Agent
         InvokeRepeating("LowerHealth", 0f, timeUnitlDeath / maxHealth); // 3 Sekunden geteilt durch die maximale Gesundheit, um die Geschwindigkeit des Slider-R�ckgangs zu berechnen
        
     }
+
+    public void Awake()
+    {
+        target = baseTarget.transform;
+    }
     
     public override void OnEpisodeBegin()
     {        
@@ -59,8 +65,6 @@ public class EnemyAgent : Agent
         Vector3 newPos = new Vector3(Mathf.Cos(angle) * spawnRadius, Mathf.Sin(angle) * spawnRadius, 0.0f);
         transform.position = target.position + newPos;
         transform.rotation = Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f));
-        //set z to 0
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0.0f);
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -125,9 +129,7 @@ public class EnemyAgent : Agent
         }
     }
 
-    public void End()
-    {
-        Destroy(gameObject);
+    public void End(){     
         EndEpisode();
     }
 
