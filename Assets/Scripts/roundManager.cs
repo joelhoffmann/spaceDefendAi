@@ -16,8 +16,6 @@ public class RoundManager : MonoBehaviour
 
     private Transform container;
     public GameObject enemyPrefab; // Das Feind-Prefab
-    public Transform baseTarget; // Das Ziel, das die Feinde angreifen
-    public GameObject nexatronPrefab; // ki gegner
     private int currentRound = 0; // Aktuelle Runde
     private List<GameObject> currentEnemies = new List<GameObject>() ; // Liste der aktuellen Feinde
     private bool lockRound = false;
@@ -119,13 +117,10 @@ public class RoundManager : MonoBehaviour
 
     void SpawnEnemy()
     {
-        Debug.Log("SpawnEnemy");
         // W�hlen Sie eine zuf�llige Position um den Bildschirmrand aus
         Vector3 randomSpawnPosition = GetRandomSpawnPosition();
 
-        GameObject newEnemyObject = Instantiate(nexatronPrefab);
-        
-        newEnemyObject.GetComponent<EnemyAgent>().target = baseTarget;
+        GameObject newEnemyObject = Instantiate(enemyPrefab, container);
 
         // Kopieren Sie die Position des Spawnpunkts, um sie zu ändern
         Vector3 adjustedSpawnPosition = randomSpawnPosition;
@@ -133,7 +128,6 @@ public class RoundManager : MonoBehaviour
         adjustedSpawnPosition += new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
 
         newEnemyObject.transform.position = adjustedSpawnPosition;
-        newEnemyObject.transform.position = new Vector3(newEnemyObject.transform.position.x, newEnemyObject.transform.position.y, 0f);
         newEnemyObject.SetActive(true);
 
         currentEnemies.Add(newEnemyObject);

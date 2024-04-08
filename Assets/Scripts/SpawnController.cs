@@ -3,8 +3,6 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public GameObject nexatronPrefab;
-    public GameObject baseTarget;
     public Transform[] spawnPoints;
     public float initialWaveTime = 5f; // Time for the initial wave
     public float waveTimeIncrement = 5f; // Incremental time added for each wave
@@ -63,6 +61,6 @@ public class SpawnController : MonoBehaviour
         }
         int randomIndex = Random.Range(0, spawnPoints.Length);
         Transform spawnPoint = spawnPoints[randomIndex];
-        Instantiate(nexatronPrefab, spawnPoint.position, spawnPoint.rotation);
+        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
     }
 }

@@ -247,8 +247,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2724466293416594378}
   - component: {fileID: 7456033305996991540}
-  - component: {fileID: 1477328890570072258}
-  - component: {fileID: 1007341059925135855}
   m_Layer: 0
   m_Name: antenna
   m_TagString: Untagged
@@ -313,7 +311,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.058691293, b: 0.03208439, a: 1}
+  m_Color: {r: 0.9716981, g: 0.041683286, b: 0.03208439, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -323,65 +321,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1477328890570072258
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3815427262713195375}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!114 &1007341059925135855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3815427262713195375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea0cf7e6c2671ce4592debcddd5b3fc6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectedCollisionType: 0
-  actualCollisionType: 0
 --- !u!1 &7049417244187405714
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,7 +701,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ad9a5639ca096fe4087ff2f39f392b2d, type: 3}
-  m_Color: {r: 1, g: 0.047468763, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.13477123, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -789,7 +728,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   vision: {fileID: 7559901136149090631}
-  antenna: {fileID: 1007341059925135855}
+  antenna: {fileID: 0}
   rotateSpeed: 1
   targetRadius: 0.5
   moveSpeed: 50
@@ -799,7 +738,7 @@ MonoBehaviour:
   damage: 10
   collisionType: 0
   healthSlider: {fileID: 3531924788802067333}
-  target: {fileID: 0}
+  baseTarget: {fileID: 0}
   spawnRadius: 1.5
 --- !u!50 &438590923461367820
 Rigidbody2D:
