@@ -29,6 +29,8 @@ public class RoundManager : MonoBehaviour
     private UIDocument resultScreenInstance;
     Button restartButton;
 
+    private AudioManager m_AudioManager;
+
     public static RoundManager Instance
     {
         get
@@ -48,6 +50,7 @@ public class RoundManager : MonoBehaviour
 
     void Awake()
     {
+        m_AudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         Debug.Log("RESULT SCREEN:" + root);
         resultScreenInstance = Instantiate(ResultScreen).GetComponent<UIDocument>();
         root = resultScreenInstance.rootVisualElement;
@@ -188,6 +191,7 @@ public class RoundManager : MonoBehaviour
     private void ShowRunEndingScreen()
     {
         Debug.Log("PLAYER DEATH EVENT TRIGGERED");
+        m_AudioManager.PlaySFX(m_AudioManager.gameOver);
         root.style.display = DisplayStyle.Flex;
         restartButton = root.Query<Button>("RestartButton").First();
         restartButton.clicked += OnRestartButtonClicked;
