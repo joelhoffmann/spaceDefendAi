@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     public int experience; 
     public static Player instance;
 
+    public event Action OnPlayerDeath;
+
     private float timer = 0f;
     public float interval = 1f; // Change this value to adjust the interval
             
@@ -43,6 +45,7 @@ public class Player : MonoBehaviour
     //    Debug.Log("Player Hit!");
 
         health -= damage;
+        
         //Debug.Log("Player health: " + health);
         if (health <= 0)
         {
@@ -55,6 +58,9 @@ public class Player : MonoBehaviour
         Debug.Log("Player died");  
            // Informieren Sie den RoundManager, dass dieser Feind gestorben ist
         RoundManager.Instance.DecreaseEnemyCount(gameObject);
+
+        OnPlayerDeath?.Invoke();
+
 
         // Kill the instance of the player
         gameObject.SetActive(false);                   
@@ -89,10 +95,11 @@ public class Player : MonoBehaviour
     }
 
     private void DestroyShield()
-    {             
+    {
         // Deaktiviere das Schild-GameObject
+        OnPlayerDeath?.Invoke();
         GameObject shield = GameObject.FindGameObjectWithTag("Shield");
-        shield.SetActive(false); 
+        shield.SetActive(false);
     }
 
      IEnumerator CallMethodAfterDelay()

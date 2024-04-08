@@ -2090,7 +2090,10 @@ MonoBehaviour:
   - {fileID: 1959583319}
   inactiveSpawnPoints: []
   activeSpawnPoints: []
-  enemyPrefab: {fileID: 9115446985968052994, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+  enemyPrefab: {fileID: 533061479079027630, guid: 57ddac98fb0b2c241b03abbd37a59292, type: 3}
+  baseTarget: {fileID: 2140733259}
+  nexatronPrefab: {fileID: 9115446985968052994, guid: ed96bb1f5b3e00942a58b3f8322f9898, type: 3}
+  ResultScreen: {fileID: 0}
 --- !u!1 &1395167483
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,11 +2195,15 @@ MonoBehaviour:
   isMenu: 0
   musicSource: {fileID: 1569065511}
   SFXSource: {fileID: 724103974}
-  backgroundMenu: {fileID: 0}
-  backgroundGame: {fileID: 0}
-  baseHit: {fileID: 0}
-  shieldDistruction: {fileID: 0}
-  shopOpen: {fileID: 0}
+  backgroundMenu: {fileID: 8300000, guid: 2e03ea08721f4428bad8a4aca5b4d869, type: 3}
+  backgroundGame: {fileID: 8300000, guid: 46ec4ed652af74f7d9a680ac07e9f8a2, type: 3}
+  baseHit: {fileID: 8300000, guid: 1c21a727fc1005d488bfb3440a1ec4f6, type: 3}
+  shieldDistruction: {fileID: 8300000, guid: 729a3c545f877c7439efb15bf160493d, type: 3}
+  shopOpen: {fileID: 8300000, guid: 136b95c3da7936d4ca0e36ee94c84389, type: 3}
+  gameOver: {fileID: 8300000, guid: 93b57a0208823974390b42a9bada4f92, type: 3}
+  bomb: {fileID: 8300000, guid: b35985004530f9b4e87ed185c302f46d, type: 3}
+  emp: {fileID: 8300000, guid: d72a260ed6c3951429338025dacf7680, type: 3}
+  magnet: {fileID: 8300000, guid: b5329b3255abef94296ccb3d52130c6e, type: 3}
 --- !u!1 &1478710278
 GameObject:
   m_ObjectHideFlags: 0
@@ -2303,6 +2310,7 @@ RectTransform:
   - {fileID: 1259289414}
   - {fileID: 2047570665}
   - {fileID: 1910541086}
+  - {fileID: 1980425238}
   - {fileID: 1563646664}
   - {fileID: 58109050}
   - {fileID: 1498962333}
@@ -2731,6 +2739,37 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1656046797173437229, guid: 08101614dc305ad46a3981f4340f0264, type: 3}
   m_PrefabInstance: {fileID: 485734781}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1980425237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1980425238}
+  m_Layer: 0
+  m_Name: -----------RunEnding------
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1980425238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980425237}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 676.4429, y: 47.47944, z: 43299.57}
+  m_LocalScale: {x: 218.73709, y: 218.73709, z: 218.73709}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1478710282}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2047570664
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,9 +12,11 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
     GameObject dragObject;
     bool draggeble = false;
     private Vector3 originalScale;
+    private AudioManager m_AudioManager;
 
     private void Awake()
     {
+        m_AudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
         originalScale = transform.localScale;
     }
 
@@ -59,6 +61,19 @@ public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, ID
             dragCollider.isTrigger = true;
 
             dragObject.transform.localScale = originalScale;
+
+            switch (dragObject.name) {
+                case "Bomb":
+                    m_AudioManager.PlaySFX(m_AudioManager.bomb);
+                    break;
+                case "EMP":
+                    m_AudioManager.PlaySFX(m_AudioManager.emp);
+                    break;
+                case "Magnet":
+                    m_AudioManager.PlaySFX(m_AudioManager.magnet);
+                    break;
+            }
+
 
             // wait and then destroy the dragObject
             if (dragObject.name == "Bomb" || dragObject.name == "EMP"){

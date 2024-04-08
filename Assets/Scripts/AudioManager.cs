@@ -16,6 +16,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip baseHit;
     public AudioClip shieldDistruction;
     public AudioClip shopOpen;
+    public AudioClip gameOver;
+    public AudioClip bomb;
+    public AudioClip emp;
+    public AudioClip magnet;
 
     private void Start()
     {
