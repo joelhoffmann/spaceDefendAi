@@ -6,50 +6,46 @@ using UnityEngine;
 
 public class EnemyAntenna : MonoBehaviour
 {   
-    public int detectedCollisionType = 0;
-    public int actualCollisionType = 0;
-
-    public int GetCollision(){
-        actualCollisionType = detectedCollisionType;
-        ResetCollision();        
-        return actualCollisionType;             
-    }
-
-    private void ResetCollision()
-    {
-        detectedCollisionType = 0;
-    }
+    public int damage = 10;      
 
     void OnTriggerEnter2D(Collider2D collision)
     {        
          if (collision.gameObject.tag == "Base")
         {
-            Debug.Log("Base Hit");	
-            detectedCollisionType = 1;
+            Debug.Log("Base Hit");    	
+            Player.instance.TakeDamage(damage);
+            RoundManager.Instance.DecreaseEnemyCount(transform.parent.gameObject);
+            Destroy(transform.parent.gameObject);
         }
 
         if (collision.gameObject.tag == "Shield")
         {
-            Debug.Log("Shield Hit");
-            detectedCollisionType = 2;               
+            Debug.Log("Shield Hit");           
+            Player.instance.TakeDamage(damage);
+            RoundManager.Instance.DecreaseEnemyCount(transform.parent.gameObject);
+            Destroy(transform.parent.gameObject);               
         }
 
         if (collision.gameObject.name == "Bomb")
         {
-            Debug.Log("Bomb Hit");
-            detectedCollisionType = 3;               
+            Debug.Log("Bomb Hit");      
+            Player.instance.TakeDamage(damage);
+            RoundManager.Instance.DecreaseEnemyCount(transform.parent.gameObject);                   
         }
 
         if (collision.gameObject.name == "EMP")
         {
-            Debug.Log("EMP Hit");
-            detectedCollisionType = 4;               
+           Debug.Log("EMP Hit");
+           transform.parent.gameObject.GetComponent<EnemyAgent>().moveSpeed = 0f;  
+           transform.parent.gameObject.GetComponent<EnemyAgent>().rotateSpeed = 0f;
+           transform.parent.gameObject.GetComponent<EnemyAgent>().Invoke("ResetSpeed", 5f);
         }
 
         if (collision.gameObject.name == "Magnet")
         {
-            Debug.Log("Magnet Hit");
-            detectedCollisionType = 5;               
+            Debug.Log("Magnet Hit");    
+           transform.parent.gameObject.GetComponent<EnemyAgent>().isBeingPulled = true;
+           transform.parent.gameObject.GetComponent<EnemyAgent>().magnetPosition = collision.transform.position;                       
         } 
 
     }

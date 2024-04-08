@@ -12,8 +12,6 @@ public class RoundManager : MonoBehaviour
     public GameObject[] spawnPoints; //Spawnpoints welche die enemy directions bestimmen
     public List<Transform> inactiveSpawnPoints = new List<Transform>();
     public List<Transform> activeSpawnPoints = new List<Transform>();
-
-
     private Transform container;
     public GameObject enemyPrefab; // Das Feind-Prefab
     private int currentRound = 0; // Aktuelle Runde
@@ -96,7 +94,7 @@ public class RoundManager : MonoBehaviour
         // Debug.Log("Starting Round " + currentRound);
         GameObject.Find("roundDisplay").GetComponent<TextMeshProUGUI>().text = "Round " + currentRound.ToString();
         lockRound = false;
-        CoinManager.Instance.AddCoins(1000);
+        CoinManager.Instance.AddCoins(200);
 
         if (currentRound == 1 || (currentRound % 5 == 0 && activeSpawnPoints.Count <= spawnPoints.Length && currentRound < 20))
         {
@@ -120,7 +118,8 @@ public class RoundManager : MonoBehaviour
         // W�hlen Sie eine zuf�llige Position um den Bildschirmrand aus
         Vector3 randomSpawnPosition = GetRandomSpawnPosition();
 
-        GameObject newEnemyObject = Instantiate(enemyPrefab, container);
+        GameObject newEnemyObject = Instantiate(enemyPrefab, container); 
+        Debug.Log("newEnemyObject: " + newEnemyObject);      
 
         // Kopieren Sie die Position des Spawnpunkts, um sie zu ändern
         Vector3 adjustedSpawnPosition = randomSpawnPosition;
@@ -135,7 +134,6 @@ public class RoundManager : MonoBehaviour
 
     Vector3 GetRandomSpawnPosition()
     {
-    
         //get random spawnpoint from active spawnpoints
         // Debug.Log("activeSpawnPoints: " + activeSpawnPoints.Count);
         int randomIndex = Random.Range(0, activeSpawnPoints.Count);
@@ -149,8 +147,10 @@ public class RoundManager : MonoBehaviour
 
     public void DecreaseEnemyCount(GameObject enemy)
     {
-        //   Debug.Log("----------------sdffghgd-------------------");
-        currentEnemies.Remove(enemy);
+       Debug.Log("----------------sdffghgd-------------------");
+       currentEnemies.Remove(enemy);
+       // Destroy(enemy);
+        Debug.Log("currentEnemies: " + currentEnemies.Count);  
     }
 
     private void addNewActiveSpawnPoint()
@@ -203,6 +203,7 @@ public class RoundManager : MonoBehaviour
         // �berpr�fen Sie, ob alle Feinde besiegt wurden
         if (currentEnemies.Count == 0 && lockRound == false)
         {
+            Debug.Log("Round Over!");
             currentRound++; // Erh�hen Sie die Rundennummer
             lockRound = true;           
             Player.instance.ReceiveCoins(150);
