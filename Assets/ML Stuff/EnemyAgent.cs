@@ -6,7 +6,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using UnityEngine.UI;
-using System;
+
 //using Unity.Sentis.Layers;
 
 public class EnemyAgent : Agent
@@ -29,8 +29,8 @@ public class EnemyAgent : Agent
     private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolgen
     //public GameObject baseTarget;
     private Transform target;
-    public float spawnRadius = 10f;   
-    public bool outsideScreen = false;
+    public float spawnRadius = 10f;
+    public bool outsideScreen;
 
     void Start()
     {
@@ -62,15 +62,23 @@ public class EnemyAgent : Agent
             // Wenn nicht gefunden, gib eine Fehlermeldung aus oder handle es entsprechend
             Debug.LogError("BaseTarget not found in the scene!");
         }
+        // Überprüfen ob der Feind außerhalb des Bildschirms ist
+        if (Camera.main.WorldToScreenPoint(transform.position).x > Screen.width || Camera.main.WorldToScreenPoint(transform.position).x < 0 || Camera.main.WorldToScreenPoint(transform.position).y > Screen.height || Camera.main.WorldToScreenPoint(transform.position).y < 0)
+        {
+            outsideScreen = true;
+        }
+        else
+        {
+            outsideScreen = false;
+        }
         // Starten Sie den Timer zum automatischen Zerst�ren des Feindes
         Invoke("RoundManager.Instance.DecreaseEnemyCount(gameObject);", timeUnitlDeath);
 
         // Starten Sie den Timer zum Senken des Sliders
-        InvokeRepeating("LowerHealth", 0f, timeUnitlDeath / maxHealth); // 3 Sekunden geteilt durch die maximale Gesundheit, um die Geschwindigkeit des Slider-R�ckgangs zu berechnen
-
+        InvokeRepeating("LowerHealth", 0f, timeUnitlDeath / maxHealth); // 3 Sekunden geteilt durch die maximale Gesundheit, um die Geschwindigkeit des Slider-R�ckgangs zu berechnen        
     }
     public override void OnEpisodeBegin()
-    {      
+    {
         // reset the velocity
         // rBody.velocity = Vector2.zero;
         //   rBody.angularVelocity = 0;
@@ -172,22 +180,24 @@ public class EnemyAgent : Agent
                 pullTimer += Time.deltaTime;
             }
         }
-        if (!outsideScreen)
-        {            
-            if (transform.position.x > 10 || transform.position.x < -10 || transform.position.y > 10 || transform.position.y < -10)
+
+        if (outsideScreen)
+        {
+            // Ziehe den Enemy in den Screen und setze dann wenn er im Screen ist die Variable outsideScreen auf false
+            Vector3 direction = target.position - transform.position;
+            rBody.AddForce(direction.normalized * moveSpeed * Time.deltaTime * 20);
+            if (Camera.main.WorldToScreenPoint(transform.position).x < Screen.width && Camera.main.WorldToScreenPoint(transform.position).x > 0 && Camera.main.WorldToScreenPoint(transform.position).y < Screen.height && Camera.main.WorldToScreenPoint(transform.position).y > 0)
             {
-                outsideScreen = true;
-            } else {      
-            // Push enemy into the screen and set the boolean outsideScreen to false
-            rBody.AddForce(-transform.position.normalized * moveSpeed * Time.deltaTime * 70);    
-            }       
+                outsideScreen = false;
+            }
         }
+
     }
 
     public void End()
     {
         EndEpisode();
-       // Destroy(gameObject);
+        // Destroy(gameObject);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -197,60 +207,61 @@ public class EnemyAgent : Agent
         continuousActionsOut[1] = Input.GetAxis("Vertical");
 
     }
-/*
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        collisionType = antenna.GetCollision();
-        //   Debug.Log("Collision Type: " + collisionType);          
+    /*
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            collisionType = antenna.GetCollision();
+            //   Debug.Log("Collision Type: " + collisionType);          
 
-        if (collisionType == 1)
-        {
-            Debug.Log("Base Hit in Enemy");
-            Player.instance.TakeDamage(damage);
-            RoundManager.Instance.DecreaseEnemyCount(gameObject);
-            collisionType = 0;
-            Destroy(gameObject);            
-           // End();
+            if (collisionType == 1)
+            {
+                Debug.Log("Base Hit in Enemy");
+                Player.instance.TakeDamage(damage);
+                RoundManager.Instance.DecreaseEnemyCount(gameObject);
+                collisionType = 0;
+                Destroy(gameObject);            
+               // End();
+            }
+            else if (collisionType == 2)
+            {
+                Debug.Log("Shield Hit in Enemy");
+                Player.instance.TakeShieldDamage(damage);
+                RoundManager.Instance.DecreaseEnemyCount(gameObject);
+                collisionType = 0;
+                Debug.Log(gameObject);
+                Destroy(gameObject);
+               // End();
+            }
+            else if (collisionType == 3)
+            {
+                RoundManager.Instance.DecreaseEnemyCount(gameObject);
+                collisionType = 0;
+                Destroy(gameObject);
+                //End();
+            }
+            else if (collisionType == 4)
+            {
+                Debug.Log("EMP Hit in Enemy");
+                moveSpeed = 0f;
+                rotateSpeed = 0f;
+                Invoke("ResetSpeed", 3f);
+                collisionType = 0;
+            }
+            else if (collisionType == 5)
+            {
+                Debug.Log("Magnet Hit in Enemy");
+                isBeingPulled = true;
+                magnetPosition = collision.transform.position;
+                collisionType = 0;
+            }
+            else
+            {
+                //   Debug.Log("No Collision Detected with Antenna");
+                collisionType = 0;
+            }
         }
-        else if (collisionType == 2)
-        {
-            Debug.Log("Shield Hit in Enemy");
-            Player.instance.TakeShieldDamage(damage);
-            RoundManager.Instance.DecreaseEnemyCount(gameObject);
-            collisionType = 0;
-            Debug.Log(gameObject);
-            Destroy(gameObject);
-           // End();
-        }
-        else if (collisionType == 3)
-        {
-            RoundManager.Instance.DecreaseEnemyCount(gameObject);
-            collisionType = 0;
-            Destroy(gameObject);
-            //End();
-        }
-        else if (collisionType == 4)
-        {
-            Debug.Log("EMP Hit in Enemy");
-            moveSpeed = 0f;
-            rotateSpeed = 0f;
-            Invoke("ResetSpeed", 3f);
-            collisionType = 0;
-        }
-        else if (collisionType == 5)
-        {
-            Debug.Log("Magnet Hit in Enemy");
-            isBeingPulled = true;
-            magnetPosition = collision.transform.position;
-            collisionType = 0;
-        }
-        else
-        {
-            //   Debug.Log("No Collision Detected with Antenna");
-            collisionType = 0;
-        }
-    }
-    */
+        */
+
     void ResetSpeed()
     {
         moveSpeed = 50;
@@ -271,10 +282,10 @@ public class EnemyAgent : Agent
         // �berpr�fen Sie, ob der Feind keine Gesundheit mehr hat
         if (currentHealth <= 0f)
         {
-            Player.instance.ReceiveCoins(100);            
+            Player.instance.ReceiveCoins(100);
             RoundManager.Instance.DecreaseEnemyCount(gameObject);
             Destroy(gameObject);
-           // End();
+            // End();
         }
     }
 

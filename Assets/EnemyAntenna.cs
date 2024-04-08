@@ -35,7 +35,7 @@ public class EnemyAntenna : MonoBehaviour
 
         if (collision.gameObject.name == "EMP")
         {
-            Debug.Log("EMP Hit");
+           Debug.Log("EMP Hit");
            transform.parent.gameObject.GetComponent<EnemyAgent>().moveSpeed = 0f;  
            transform.parent.gameObject.GetComponent<EnemyAgent>().rotateSpeed = 0f;
            transform.parent.gameObject.GetComponent<EnemyAgent>().Invoke("ResetSpeed", 5f);

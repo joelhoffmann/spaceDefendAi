@@ -335,8 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea0cf7e6c2671ce4592debcddd5b3fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectedCollisionType: 0
-  actualCollisionType: 0
+  damage: 10
 --- !u!61 &6461057288338383666
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -795,11 +794,14 @@ MonoBehaviour:
   moveSpeed: 50
   maxHealth: 100
   currentHealth: 0
-  timeUnitlDeath: 50
+  timeUnitlDeath: 15
   damage: 10
   collisionType: 0
   healthSlider: {fileID: 3531924788802067333}
+  isBeingPulled: 0
+  magnetPosition: {x: 0, y: 0, z: 0}
   spawnRadius: 1.5
+  outsideScreen: 0
 --- !u!50 &438590923461367820
 Rigidbody2D:
   serializedVersion: 4
