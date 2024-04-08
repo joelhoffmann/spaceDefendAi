@@ -183,14 +183,14 @@ public class RoundManager : MonoBehaviour
     {
         Debug.Log("PLAYER DEATH EVENT TRIGGERED");
         root.style.display = DisplayStyle.Flex;
-        restartButton = root.Query<Button>("restart");
-        restartButton.clickable.clicked += OnRestartButtonClick;
+        restartButton = root.Query<Button>("RestartButton").First();
+        restartButton.clicked += OnRestartButtonClicked;
     }
 
-    void OnRestartButtonClick()
+    void OnRestartButtonClicked()
     {
-        // Handle the button click event here
-        Debug.Log("Restart button clicked!");
+      // Handle the button click event here
+      Debug.Log("Restart button clicked!");
     }
 
 
