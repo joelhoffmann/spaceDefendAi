@@ -6,15 +6,15 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using UnityEngine.UI;
+using System;
 //using Unity.Sentis.Layers;
 
 public class EnemyAgent : Agent
 {
     Rigidbody2D rBody;
-
     public EnemyVision vision;
     public EnemyAntenna antenna;
-    public float rotateSpeed = 5;
+    public float rotateSpeed = 1;
     public float targetRadius = 0.5f;
     public float moveSpeed = 50;
     public float maxHealth = 100f;
@@ -23,14 +23,15 @@ public class EnemyAgent : Agent
     public int damage = 10;
     public int collisionType = 0;
     public Slider healthSlider;
-    private bool isBeingPulled = false; // Überprüft, ob der Feind gerade zum Magneten gezogen wird
-    private Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
+    public bool isBeingPulled = false; // Überprüft, ob der Feind gerade zum Magneten gezogen wird
+    public Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
     private float pullDuration = 5f; // Die Dauer, für die der Feind zum Magneten gezogen wird
     private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolgen
     //public GameObject baseTarget;
     private Transform target;
-    public float spawnRadius = 10f;
-    private bool enemyDead = false;
+    public float spawnRadius = 10f;   
+    public bool outsideScreen = false;
+
     void Start()
     {
         rBody = GetComponent<Rigidbody2D>();
@@ -68,14 +69,8 @@ public class EnemyAgent : Agent
         InvokeRepeating("LowerHealth", 0f, timeUnitlDeath / maxHealth); // 3 Sekunden geteilt durch die maximale Gesundheit, um die Geschwindigkeit des Slider-R�ckgangs zu berechnen
 
     }
-
-    public void Awake()
-    {
-
-    }
-
     public override void OnEpisodeBegin()
-    {
+    {      
         // reset the velocity
         // rBody.velocity = Vector2.zero;
         //   rBody.angularVelocity = 0;
@@ -164,7 +159,7 @@ public class EnemyAgent : Agent
         if (isBeingPulled)
         {
             Vector3 direction = magnetPosition - transform.position;
-            rBody.AddForce(direction.normalized * moveSpeed * Time.deltaTime * 50);
+            rBody.AddForce(direction.normalized * moveSpeed * Time.deltaTime * 75);
 
             // Überprüfen, ob die Ziehzeit abgelaufen ist
             if (pullTimer >= pullDuration)
@@ -176,6 +171,16 @@ public class EnemyAgent : Agent
             {
                 pullTimer += Time.deltaTime;
             }
+        }
+        if (!outsideScreen)
+        {            
+            if (transform.position.x > 10 || transform.position.x < -10 || transform.position.y > 10 || transform.position.y < -10)
+            {
+                outsideScreen = true;
+            } else {      
+            // Push enemy into the screen and set the boolean outsideScreen to false
+            rBody.AddForce(-transform.position.normalized * moveSpeed * Time.deltaTime * 70);    
+            }       
         }
     }
 
@@ -192,7 +197,7 @@ public class EnemyAgent : Agent
         continuousActionsOut[1] = Input.GetAxis("Vertical");
 
     }
-
+/*
     private void OnTriggerEnter2D(Collider2D collision)
     {
         collisionType = antenna.GetCollision();
@@ -200,17 +205,20 @@ public class EnemyAgent : Agent
 
         if (collisionType == 1)
         {
+            Debug.Log("Base Hit in Enemy");
             Player.instance.TakeDamage(damage);
             RoundManager.Instance.DecreaseEnemyCount(gameObject);
             collisionType = 0;
-            Destroy(gameObject);
+            Destroy(gameObject);            
            // End();
         }
         else if (collisionType == 2)
         {
+            Debug.Log("Shield Hit in Enemy");
             Player.instance.TakeShieldDamage(damage);
             RoundManager.Instance.DecreaseEnemyCount(gameObject);
             collisionType = 0;
+            Debug.Log(gameObject);
             Destroy(gameObject);
            // End();
         }
@@ -242,10 +250,11 @@ public class EnemyAgent : Agent
             collisionType = 0;
         }
     }
+    */
     void ResetSpeed()
     {
         moveSpeed = 50;
-        rotateSpeed = 5;
+        rotateSpeed = 1;
     }
 
     void LowerHealth()
@@ -262,9 +271,9 @@ public class EnemyAgent : Agent
         // �berpr�fen Sie, ob der Feind keine Gesundheit mehr hat
         if (currentHealth <= 0f)
         {
-            Player.instance.ReceiveCoins(100);
-            enemyDead = true;
+            Player.instance.ReceiveCoins(100);            
             RoundManager.Instance.DecreaseEnemyCount(gameObject);
+            Destroy(gameObject);
            // End();
         }
     }

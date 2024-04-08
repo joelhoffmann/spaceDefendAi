@@ -10,8 +10,6 @@ public class RoundManager : MonoBehaviour
     public GameObject[] spawnPoints; //Spawnpoints welche die enemy directions bestimmen
     public List<Transform> inactiveSpawnPoints = new List<Transform>();
     public List<Transform> activeSpawnPoints = new List<Transform>();
-
-
     private Transform container;
     public GameObject enemyPrefab; // Das Feind-Prefab
     private int currentRound = 0; // Aktuelle Runde
