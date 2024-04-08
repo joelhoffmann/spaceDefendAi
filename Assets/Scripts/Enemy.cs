@@ -15,9 +15,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform baseTransform;
 
      private bool isBeingPulled = false; // Überprüft, ob der Feind gerade zum Magneten gezogen wird
-private Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
-private float pullDuration = 5f; // Die Dauer, für die der Feind zum Magneten gezogen wird
-private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolgen
+    private Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
+    private float pullDuration = 5f; // Die Dauer, für die der Feind zum Magneten gezogen wird
+    private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolgen
 
     void Start()
     {

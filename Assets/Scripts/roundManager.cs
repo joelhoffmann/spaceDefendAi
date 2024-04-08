@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RoundManager : MonoBehaviour
 {
@@ -13,10 +15,17 @@ public class RoundManager : MonoBehaviour
     private Transform container;
     public GameObject enemyPrefab; // Das Feind-Prefab
     private int currentRound = 0; // Aktuelle Runde
-    private List<GameObject> currentEnemies = new List<GameObject>(); // Liste der aktuellen Feinde
+    private List<GameObject> currentEnemies = new List<GameObject>() ; // Liste der aktuellen Feinde
     private bool lockRound = false;
     private int enemiesPerWave = 0;
 
+    //UI Result Screen
+    VisualElement root;
+    public UIDocument ResultScreen;
+    private UIDocument resultScreenInstance;
+    Button restartButton;
+
+    private AudioManager m_AudioManager;
 
     public static RoundManager Instance
     {
@@ -37,6 +46,15 @@ public class RoundManager : MonoBehaviour
 
     void Awake()
     {
+        m_AudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        Debug.Log("RESULT SCREEN:" + root);
+        resultScreenInstance = Instantiate(ResultScreen).GetComponent<UIDocument>();
+        root = resultScreenInstance.rootVisualElement;
+        root.style.display = DisplayStyle.None;
+        
+
+
+
         container = GameObject.Find("activeEnemyContainer").transform;
         //enemyPrefab = Resources.Load<GameObject>("enemyTemplate"); // Setze das Prefab aus den Ressourcen
         if (enemyPrefab == null)
@@ -52,8 +70,8 @@ public class RoundManager : MonoBehaviour
                 inactiveSpawnPoints.Add(spawnPoints[i].transform);
             }
 
-        //    Debug.Log("initiated spawnpints");
-        //    Debug.Log("inActiveSpawnPoints: " + inactiveSpawnPoints.Count);
+            //    Debug.Log("initiated spawnpints");
+            //    Debug.Log("inActiveSpawnPoints: " + inactiveSpawnPoints.Count);
         }
         else
         {
@@ -65,18 +83,20 @@ public class RoundManager : MonoBehaviour
 
     void Start()
     {
+        Player.instance.OnPlayerDeath += HandlePlayerDeath;
         container = GameObject.Find("activeEnemyContainer").transform;
+
         //StartNewRound();
     }
 
     void StartNewRound()
     {
-       // Debug.Log("Starting Round " + currentRound);
+        // Debug.Log("Starting Round " + currentRound);
         GameObject.Find("roundDisplay").GetComponent<TextMeshProUGUI>().text = "Round " + currentRound.ToString();
         lockRound = false;
         CoinManager.Instance.AddCoins(200);
 
-        if (currentRound == 1 || (currentRound % 5 == 0 && activeSpawnPoints.Count <= spawnPoints.Length && currentRound < 20 ))
+        if (currentRound == 1 || (currentRound % 5 == 0 && activeSpawnPoints.Count <= spawnPoints.Length && currentRound < 20))
         {
             addNewActiveSpawnPoint();
         }
@@ -84,7 +104,7 @@ public class RoundManager : MonoBehaviour
 
         // Spawnen Sie die Feinde f�r die aktuelle Runde
         enemiesPerWave = (int)(0.5 * currentRound + 1);
-       // print("enemiesPerWave: " + enemiesPerWave);
+        // print("enemiesPerWave: " + enemiesPerWave);
 
         for (int i = 0; i < enemiesPerWave; i++)
         {
@@ -92,7 +112,7 @@ public class RoundManager : MonoBehaviour
         }
     }
 
-    
+
     void SpawnEnemy()
     {
         // W�hlen Sie eine zuf�llige Position um den Bildschirmrand aus
@@ -113,44 +133,22 @@ public class RoundManager : MonoBehaviour
     }
 
     Vector3 GetRandomSpawnPosition()
-    {        
-        /*
-        float screenWidth = Camera.main.orthographicSize * 2f * Screen.width / Screen.height;
-        float screenHeight = Camera.main.orthographicSize * 2f;
-
-        // W�hlen Sie eine zuf�llige Seite des Bildschirms aus
-        int side = Random.Range(0, 4); // 0: oben, 1: rechts, 2: unten, 3: links
-
-        // W�hlen Sie eine zuf�llige Position auf der ausgew�hlten Seite aus
-        switch (side)
-        {
-            case 0: // oben
-                return new Vector3(Random.Range(-screenWidth / 2f, screenWidth / 2f), screenHeight / 2f + 1f, 0f);
-            case 1: // rechts
-                return new Vector3(screenWidth / 2f + 1f, Random.Range(-screenHeight / 2f, screenHeight / 2f), 0f);
-            case 2: // unten
-                return new Vector3(Random.Range(-screenWidth / 2f, screenWidth / 2f), -screenHeight / 2f - 1f, 0f);
-            case 3: // links
-                return new Vector3(-screenWidth / 2f - 1f, Random.Range(-screenHeight / 2f, screenHeight / 2f), 0f);
-            default:
-                return Vector3.zero;
-        }
-        */
+    {
         //get random spawnpoint from active spawnpoints
-       // Debug.Log("activeSpawnPoints: " + activeSpawnPoints.Count);
+        // Debug.Log("activeSpawnPoints: " + activeSpawnPoints.Count);
         int randomIndex = Random.Range(0, activeSpawnPoints.Count);
         Transform randomSpawnPoint = activeSpawnPoints[randomIndex];
         // add varition from spawPoint direction +/- 1f
         Vector3 randomSpawnPosition = randomSpawnPoint.position;
         Vector3 adjustedSpawnPosition = randomSpawnPosition + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0f);
         return adjustedSpawnPosition;
-;
+        ;
     }
 
     public void DecreaseEnemyCount(GameObject enemy)
     {
-        Debug.Log("----------------sdffghgd-------------------");                            
-        currentEnemies.Remove(enemy);
+       Debug.Log("----------------sdffghgd-------------------");
+       currentEnemies.Remove(enemy);
        // Destroy(enemy);
         Debug.Log("currentEnemies: " + currentEnemies.Count);  
     }
@@ -171,6 +169,32 @@ public class RoundManager : MonoBehaviour
                 newSpawnPointFound = true;
             }
         }
+    }
+
+    private void HandlePlayerDeath()
+    {
+        StopEnemySpawn();
+        ShowRunEndingScreen();
+    }
+
+    private void StopEnemySpawn()
+    {
+
+    }
+
+    private void ShowRunEndingScreen()
+    {
+        Debug.Log("PLAYER DEATH EVENT TRIGGERED");
+        m_AudioManager.PlaySFX(m_AudioManager.gameOver);
+        root.style.display = DisplayStyle.Flex;
+        restartButton = root.Query<Button>("RestartButton").First();
+        restartButton.clicked += OnRestartButtonClicked;
+    }
+
+    void OnRestartButtonClicked()
+    {
+      // Handle the button click event here
+      Debug.Log("Restart button clicked!");
     }
 
 
@@ -197,17 +221,4 @@ public class RoundManager : MonoBehaviour
         }
 
     }
-
-    /*
-        private void addNewActiveSpawnPoint()
-        {
-            //get random spawnpoint from inactive spawnpoints
-            int randomIndex = Random.Range(0, inActiveSpawnPoints.Length);
-            Transform randomSpawnPoint = inActiveSpawnPoints[randomIndex];
-            //add random spawnpoint to active spawnpoints
-            activeSpawnPoints.Add(randomSpawnPoint);
-            //remove random spawnpoint from inactive spawnpoints
-            inActiveSpawnPoints.RemoveAt(randomIndex);
-        }
-    */
 }
