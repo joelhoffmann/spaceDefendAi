@@ -178,29 +178,29 @@ public class RoundManager : MonoBehaviour
     }
 
     private void StopEnemySpawn()
-    {         
-        lockRound = true;        
-        CancelInvoke("SpawnEnemy");               
+    {
+        lockRound = true;
+        CancelInvoke("SpawnEnemy");
     }
 
     private void ShowRunEndingScreen()
     {
         Debug.Log("PLAYER DEATH EVENT TRIGGERED");
-        //m_AudioManager.PlaySFX(m_AudioManager.gameOver);
+        m_AudioManager.PlaySFX(m_AudioManager.gameOver);
         root.style.display = DisplayStyle.Flex;
         restartButton = root.Query<Button>("RestartButton").First();
         restartButton.clicked += OnRestartButtonClicked;
     }
 
     void OnRestartButtonClicked()
-    {    
-        Debug.Log("Restart button clicked!");        
+    {
+        Debug.Log("Restart button clicked!");
         UnityEngine.SceneManagement.SceneManager.LoadScene("game scene");
     }
 
 
     void Update()
-    {  
+    {
         if (currentEnemies.Count == 0 && lockRound == false)
         {
             Debug.Log("Round Over!");

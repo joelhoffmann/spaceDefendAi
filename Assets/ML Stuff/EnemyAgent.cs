@@ -7,8 +7,6 @@ using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using UnityEngine.UI;
 
-//using Unity.Sentis.Layers;
-
 public class EnemyAgent : Agent
 {
     Rigidbody2D rBody;
@@ -27,7 +25,6 @@ public class EnemyAgent : Agent
     public Vector3 magnetPosition; // Die Position des Magneten, zu dem der Feind gezogen wird
     private float pullDuration = 5f; // Die Dauer, für die der Feind zum Magneten gezogen wird
     private float pullTimer = 0f; // Ein Timer, um die Dauer des Ziehens zu verfolgen
-    //public GameObject baseTarget;
     private Transform target;
     public float spawnRadius = 10f;
     public bool outsideScreen;
@@ -37,16 +34,13 @@ public class EnemyAgent : Agent
         rBody = GetComponent<Rigidbody2D>();
 
         currentHealth = maxHealth;
-
-        // Initialisieren Sie den Slider, wenn er zugewiesen ist
+       
         if (healthSlider != null)
         {
             healthSlider.maxValue = maxHealth;
             healthSlider.value = maxHealth;
         }
-
-        //   target = baseTarget.transform;   
-
+        
         // Finde das GameObject mit dem Namen "BaseTarget" in der Szene
         GameObject foundBaseTarget = GameObject.Find("Base");
         antenna = GameObject.Find("Antenna").GetComponent<EnemyAntenna>();

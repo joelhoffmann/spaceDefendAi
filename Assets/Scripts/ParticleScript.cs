@@ -8,10 +8,12 @@ public class ParticleScript : MonoBehaviour
     {
         m_AudioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
-    void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)    
     {
+        Debug.Log("Collision detected with " + collision.gameObject.tag);
         if (collision.gameObject.tag == "Enemy")
         {
+            Debug.Log("Shield damaged");
             GetComponent<ParticleSystem>().Play();
             m_AudioManager.PlaySFX(m_AudioManager.baseHit);
             if (Player.instance.shieldHealth <= 0)
