@@ -22,7 +22,7 @@ public class EnemyVision : MonoBehaviour
             return;
         }
         stuffInView++;
-        spriteRenderer.color = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+        spriteRenderer.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -34,7 +34,7 @@ public class EnemyVision : MonoBehaviour
         stuffInView--;
         if (stuffInView == 0)
         {
-            spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
+            spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.50f);
         }
     }
 }
