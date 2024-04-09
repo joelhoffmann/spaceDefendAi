@@ -368,7 +368,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.018906593, y: -0.10315657}
+  m_Offset: {x: 0.16026437, y: -0.13904804}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -379,7 +379,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.58349, y: 1.2063124}
+  m_Size: {x: 7.1332836, y: 0.83635557}
   m_EdgeRadius: 0
 --- !u!1 &7049417244187405714
 GameObject:
@@ -761,7 +761,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ad9a5639ca096fe4087ff2f39f392b2d, type: 3}
-  m_Color: {r: 1, g: 0.13477123, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.1709433, b: 0.043396115, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -794,7 +794,7 @@ MonoBehaviour:
   moveSpeed: 50
   maxHealth: 100
   currentHealth: 0
-  timeUnitlDeath: 15
+  timeUnitlDeath: 12
   damage: 10
   collisionType: 0
   healthSlider: {fileID: 3531924788802067333}

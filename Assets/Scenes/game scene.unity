@@ -836,7 +836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5089261357393202160, guid: 6af1dcea9c6f80844aac6a87553ced89, type: 3}
       propertyPath: shieldHealth
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5089261357393202161, guid: 6af1dcea9c6f80844aac6a87553ced89, type: 3}
       propertyPath: m_Name
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ee8261317c1ff734daa9da91d24312b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e5bca319dc0762a41963dd3decb8b6ec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1105,8 +1105,8 @@ GameObject:
   - component: {fileID: 624705813}
   - component: {fileID: 624705812}
   - component: {fileID: 624705811}
-  m_Layer: 5
-  m_Name: MovieBalken
+  m_Layer: 0
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,11 +1128,11 @@ MonoBehaviour:
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fea3b9b57e5d390449c6ed94f04da701, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1149,7 +1149,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624705810}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!224 &624705813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1157,17 +1157,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624705810}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 241041.4}
-  m_LocalScale: {x: 333.3333, y: 333.3333, z: 333.3333}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 813.12427}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1478710282}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -30.973, y: -947}
-  m_SizeDelta: {x: 6.9164, y: 1.4215}
+  m_AnchoredPosition: {x: -0.0924, y: -2.9313}
+  m_SizeDelta: {x: 6.9164, y: 1.0187}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &664052339
 GameObject:
@@ -2009,81 +2009,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8382016195081425867, guid: 9b8dfecfa9a32724cba006c9ce743944, type: 3}
   m_PrefabInstance: {fileID: 2096940702}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1257967919
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1257967920}
-  - component: {fileID: 1257967922}
-  - component: {fileID: 1257967921}
-  m_Layer: 5
-  m_Name: MovieBalken
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1257967920
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257967919}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 241041.4}
-  m_LocalScale: {x: 333.3333, y: 333.3333, z: 333.3333}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1478710282}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.666666, y: 949.99994}
-  m_SizeDelta: {x: 6.9164, y: 1.4215}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1257967921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257967919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: fea3b9b57e5d390449c6ed94f04da701, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1257967922
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1257967919}
-  m_CullTransparentMesh: 1
 --- !u!1 &1259289413
 GameObject:
   m_ObjectHideFlags: 0
@@ -2462,8 +2387,6 @@ RectTransform:
   - {fileID: 1563646664}
   - {fileID: 58109050}
   - {fileID: 1498962333}
-  - {fileID: 624705813}
-  - {fileID: 1257967920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3043,6 +2966,14 @@ PrefabInstance:
       value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 8382016195081425864, guid: 9b8dfecfa9a32724cba006c9ce743944, type: 3}
+      propertyPath: m_Size.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8382016195081425864, guid: 9b8dfecfa9a32724cba006c9ce743944, type: 3}
+      propertyPath: m_Size.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8382016195081425864, guid: 9b8dfecfa9a32724cba006c9ce743944, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -3157,7 +3088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3878348088144165637, guid: 21ad6aa93c834a34e81bc3bda2348105, type: 3}
       propertyPath: m_Size.y
-      value: 1.46
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 3878348088144165637, guid: 21ad6aa93c834a34e81bc3bda2348105, type: 3}
       propertyPath: m_Enabled
@@ -3470,3 +3401,4 @@ SceneRoots:
   - {fileID: 1095001881}
   - {fileID: 485734781}
   - {fileID: 312546338}
+  - {fileID: 624705813}
