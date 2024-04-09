@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
         GameObject shield = GameObject.FindGameObjectWithTag("Shield");
         Color color = shield.GetComponent<SpriteRenderer>().color;
-        color.a -= 0.065f;
+        color.a -= 0.045f;
         shield.GetComponent<SpriteRenderer>().color = color;
 
         if (shieldHealth == 0)
