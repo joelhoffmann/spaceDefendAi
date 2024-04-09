@@ -196,9 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a99d48caec5d28142951605c5d71f13e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombSprite: {fileID: 21300000, guid: e5bca319dc0762a41963dd3decb8b6ec, type: 3}
-  magnetSprite: {fileID: 21300000, guid: dd00ea3e67495c441af870f86b0f5147, type: 3}
-  empSprite: {fileID: 21300000, guid: 08347cf878d76be49a81d55ac9449d49, type: 3}
+  bombSprite: {fileID: 21300000, guid: ee8261317c1ff734daa9da91d24312b3, type: 3}
+  magnetSprite: {fileID: 21300000, guid: f94df059a55ade342918fe7d0e8c2299, type: 3}
+  empSprite: {fileID: 21300000, guid: 9c7df7a295e42674eb093a49346a77db, type: 3}
 --- !u!1 &135796467
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5089261357393202160, guid: 6af1dcea9c6f80844aac6a87553ced89, type: 3}
       propertyPath: shieldHealth
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5089261357393202161, guid: 6af1dcea9c6f80844aac6a87553ced89, type: 3}
       propertyPath: m_Name
@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e5bca319dc0762a41963dd3decb8b6ec, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee8261317c1ff734daa9da91d24312b3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1128,7 +1128,7 @@ MonoBehaviour:
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1149,7 +1149,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624705810}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!224 &624705813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1166,8 +1166,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0924, y: -2.9313}
-  m_SizeDelta: {x: 6.9164, y: 1.0187}
+  m_AnchoredPosition: {x: -0.0924, y: -2.7299}
+  m_SizeDelta: {x: 6.9164, y: 1.4215}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &664052339
 GameObject:
@@ -3080,7 +3080,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3878348088144165637, guid: 21ad6aa93c834a34e81bc3bda2348105, type: 3}
       propertyPath: m_Size.y
-      value: 1.2
+      value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: 3878348088144165637, guid: 21ad6aa93c834a34e81bc3bda2348105, type: 3}
       propertyPath: m_Enabled
