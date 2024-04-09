@@ -42,12 +42,12 @@ public class PlayButtonScript : MonoBehaviour
     public void PlayGame()
     {
         Debug.Log("Play Game");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
     }
     public void StartGame()
     {
         Debug.Log("Start Game");
-        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
     public void GoBackToStartScreen()
     {
