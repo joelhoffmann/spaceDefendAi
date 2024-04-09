@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UIElements;
 
 public class RoundManager : MonoBehaviour
@@ -188,6 +188,7 @@ public class RoundManager : MonoBehaviour
         Debug.Log("PLAYER DEATH EVENT TRIGGERED");
         m_AudioManager.PlaySFX(m_AudioManager.gameOver);
         root.style.display = DisplayStyle.Flex;
+        StartCoroutine(PostJsonData());
         restartButton = root.Query<Button>("RestartButton").First();
         restartButton.clicked += OnRestartButtonClicked;
     }
@@ -220,5 +221,44 @@ public class RoundManager : MonoBehaviour
             Invoke("StartNewRound", 3);
         }
 
+    }  
+    IEnumerator PostJsonData()
+    {
+        // Erstelle ein UnityWebRequest-Objekt für die POST-Anfrage
+        UnityWebRequest request = new UnityWebRequest("https://42baiw2cuduacmidi63rqxpjaq0vmvbc.lambda-url.eu-north-1.on.aws/user/saveScore", "POST");
+
+        System.DateTime currentTime = System.DateTime.UtcNow;
+        long unixTime = ((System.DateTimeOffset)currentTime).ToUnixTimeSeconds();
+        Debug.Log(unixTime);
+
+        // Erstelle einen String für den Zeitstempel
+        string timestampString = unixTime.ToString();
+        Debug.Log(timestampString);     
+
+        ExpManager expManager = ExpManager.Instance;
+        int exp = expManager.GetExp();   
+
+        string json = "{\"username\": \"Max Muster\", \"score\": " + exp.ToString() + ", \"timestamp\": \"" + timestampString + "\"}";
+
+        // Füge den JSON-String als Daten zum Request hinzu
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
+        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        // Warte auf die Antwort des Servers
+        yield return request.SendWebRequest();
+
+        // Überprüfe auf Fehler
+        if (request.result == UnityWebRequest.Result.ConnectionError ||
+            request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError(request.error);
+        }
+        else
+        {
+            // Erfolgreiche Anfrage
+            Debug.Log("Request erfolgreich gesendet!");            
+        }
     }
+
 }
