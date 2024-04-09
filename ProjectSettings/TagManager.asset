@@ -11,6 +11,7 @@ TagManager:
   - Wall
   - Shop
   - Audio
+  - Movie
   layers:
   - Default
   - TransparentFX

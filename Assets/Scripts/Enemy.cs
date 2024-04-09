@@ -73,33 +73,20 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        // �berpr�fen Sie, ob die Kollision mit einer Wand erfolgt
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            // Wenn der Feind eine Wand ber�hrt, soll keine Aktion ausgef�hrt werden
-            // Sie k�nnen hier optional zus�tzliche Aktionen hinzuf�gen
-            Debug.Log("Wall Hit");        }          
     
-    }      
-
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Enter Trigger " + collision.gameObject.tag + " " + collision.gameObject.name);
 
         if (collision.gameObject.tag == "Base")
 
-        {
-            Debug.Log("Base Hit");
+        {            
             Player.instance.TakeDamage(damage);
             Die();
         }
 
         if (collision.gameObject.tag == "Shield")
-        {
-            Debug.Log("Shield Hit");
+        {          
             Player.instance.TakeShieldDamage(damage);
             Die();
         }

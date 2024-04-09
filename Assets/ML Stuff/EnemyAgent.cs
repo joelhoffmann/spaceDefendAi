@@ -152,8 +152,7 @@ public class EnemyAgent : Agent
 
         // took too long
         if (StepCount > 1000)
-        {
-            Debug.Log("Enemy Dead");
+        {            
             SetReward(-1.0f * distanceToTarget / spawnRadius);
             End();
         }

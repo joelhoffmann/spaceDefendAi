@@ -41,7 +41,7 @@ public class Wall : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(_linePositions[_linePositions.Count - 1], 0.1f);
         foreach (Collider2D collider in colliders)
         {
-            if (collider.gameObject.tag == "Shield" || collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Base" || collider.gameObject.tag == "Shop")                
+            if (collider.gameObject.tag == "Shield" || collider.gameObject.tag == "Enemy" || collider.gameObject.tag == "Base" || collider.gameObject.tag == "Shop" || collider.gameObject.tag == "Movie")                
             {             
                 enabled = false;                
                 return;
