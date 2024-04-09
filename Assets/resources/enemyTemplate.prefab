@@ -64,7 +64,7 @@ MonoBehaviour:
   moveSpeed: 1
   maxHealth: 100
   currentHealth: 0
-  timeUnitlDeath: 5
+  timeUnitlDeath: 6
   damage: 10
   healthSlider: {fileID: 3772099480975753499}
   baseTransform: {fileID: 0}
@@ -278,14 +278,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.745283, g: 0.1511659, b: 0.16898245, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 83f530308b93c554f91af6d5a8ce5607, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ad9a5639ca096fe4087ff2f39f392b2d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

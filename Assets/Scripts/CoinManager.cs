@@ -44,7 +44,7 @@ public class CoinManager : MonoBehaviour
         if (coins >= amount)
         {
             coins -= amount;
-            Debug.Log("Subtracted " + amount + " coins. Total coins: " + coins);
+          //  Debug.Log("Subtracted " + amount + " coins. Total coins: " + coins);
             refreshDisplay();
             return true;
         }

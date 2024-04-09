@@ -15,14 +15,14 @@ public class menuButton : MonoBehaviour
     {
         if (isPopupOpen)
         {
-            // Wenn das Pop-up-Fenster bereits geöffnet ist, dann schließe es.
+            // Wenn das Pop-up-Fenster bereits geï¿½ffnet ist, dann schlieï¿½e es.
             popupWindow.SetActive(false);
-            print("test");
+          //  print("test");
             isPopupOpen = false;
         }
         else
         {
-            // Wenn das Pop-up-Fenster geschlossen ist, dann öffne es.
+            // Wenn das Pop-up-Fenster geschlossen ist, dann ï¿½ffne es.
             popupWindow.SetActive(true);
             isPopupOpen = true;
         }
